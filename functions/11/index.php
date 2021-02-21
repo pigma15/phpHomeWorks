@@ -57,11 +57,11 @@ function renderDOM($array) {
     $dom = "";
     foreach ($array as $id => $inside) {
         if (is_array($inside)) {
-            $dom .= "<div id='".$id."' style='display: flex; flex-wrap: wrap; margin: 5px; background-color: ".uniqueRGB()."'>".$id;
+            $dom .= "<div id='".$id."' style='display: flex; flex-wrap: wrap; margin: 4px; background-color: ".uniqueRGB()."'>".$id;
             $dom .= renderDOM($inside);
             $dom .= "</div>";
         } else {
-            $dom .= "<div id='".$id."' style='display: flex; flex-wrap: wrap; margin: 5px; background-color: ".uniqueRGB()."'>".$id."</div>";
+            $dom .= "<div id='".$id."' style='display: flex; flex-wrap: wrap; margin: 4px; background-color: ".uniqueRGB()."'>".$id."</div>";
         }
     }
     return $dom;
