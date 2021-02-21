@@ -67,4 +67,4 @@ function renderDOM($array) {
     return $dom;
 }
 
-echo $domData = "<div style='display: flex; flex-wrap: wrap; background-color: ".uniqueRGB()."; width: 100vw; height: auto;'>".renderDOM(generateArray(20, 1, 1)['array'])."</div>";
+echo $domData = "<div style='display: flex; flex-wrap: wrap; background-color: ".uniqueRGB()."; width: 100vw; height: auto; font-size: 14px;'>".renderDOM(generateArray(20, 1, 1)['array'])."</div>";
