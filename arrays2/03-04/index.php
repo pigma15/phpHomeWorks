@@ -8,7 +8,7 @@ echo 'Sukurkite masyvą iš 10 elementų. Kiekvienas masyvo elementas turi būti
 
 $arrayAZ = range('A', 'Z');
 $randomAZ = [];
-foreach (range(1, 10) as$_) {
+foreach (range(1, 10) as $_) {
     $tempArray = [];
     $tempLength = rand(2, 20);
     foreach (range(1, $tempLength) as $_) {
@@ -30,6 +30,12 @@ echo '<br><br>';
 echo 'Išrūšiuokite trečio uždavinio pirmo lygio masyvą taip, kad elementai kurių masyvai trumpiausi eitų pradžioje.<br><br>';
 
 echo 'Surusiuotas pagrindinis masyvas pagal vidiniu masyvu ilgi: ';
-sort($randomAZ);
+// sort($randomAZ);
+
+function arrayLength($a, $b) {
+    return count($a) <=> count($b);
+}
+usort($randomAZ, 'arrayLength');
+
 echo '<pre>';
 print_r($randomAZ);

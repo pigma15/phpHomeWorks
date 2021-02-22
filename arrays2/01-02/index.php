@@ -7,12 +7,10 @@ echo '<br><br>';
 echo 'Sugeneruokite masyvą iš 10 elementų, kurio elementai būtų masyvai iš 5 elementų su reikšmėmis nuo 5 iki 25.<br><br>';
 
 $twoDimensionalArray = [];
-foreach (range(1,10) as $_) {
-    $tempArray = [];
+foreach (range(1,10) as $index => $_) {
     foreach (range(1,5) as $_) {
-        $tempArray[] = rand(5, 25);
+        $twoDimensionalArray[$index][] = rand(5, 25);
     }
-    $twoDimensionalArray[] = $tempArray;
 }
 echo '<pre>';
 print_r($twoDimensionalArray);
@@ -22,15 +20,15 @@ echo 'Uzduotis nr. 2';
 echo '<br><br>';
 echo 'A. Suskaičiuokite kiek masyve yra elementų didesnių už 10;<br><br>';
 
-$moreThanTen = 0;
-$largest = -INF;
+$largerThanTen = 0;
+$largest = -INF; //PHP_MIN_INT;
 foreach($twoDimensionalArray as $singleArray) {
     foreach($singleArray as $value) {
         if ($value > $largest) $largest = $value;
-        if (10 < $value) $moreThanTen++;
+        if (10 < $value) $largerThanTen++;
     }
 }
-echo 'Reiksmiu didesniu uz 10 yra ' . $moreThanTen.'<br><br>';
+echo 'Reiksmiu didesniu uz 10 yra ' . $largerThanTen.'<br><br>';
 
 echo 'B. Raskite didžiausio elemento reikšmę;<br><br>';
 
@@ -67,7 +65,3 @@ foreach ($twoDimensionalArray as $singleArray) {
 }
 echo '<pre>';
 print_r($arrayOfSums);
-
-
-
-

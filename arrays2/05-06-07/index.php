@@ -43,18 +43,18 @@ echo 'Uzduotis nr. 7';
 echo '<br><br>';
 echo 'Prie 6 uždavinio masyvo antro lygio masyvų pridėkite dar du elementus: name ir surname. Elementus užpildykite stringais iš atsitiktinai sugeneruotų lotyniškų raidžių, kurių ilgiai nuo 5 iki 15.<br><br>';
 
-$latinABC = range('a', 'z');
+$latinABC = array_flip(range('a', 'z'));
 foreach($users as &$user) {
     $name = '';
     $nameLength = rand(5, 15);
     $surname = '';
     $surnameLength = rand(5, 15);
     for ($i = 0; $i < $nameLength; $i++) {
-        $name .= ($i === 0) ? strtoupper(array_rand(array_flip($latinABC))) : array_rand(array_flip($latinABC));
+        $name .= ($i === 0) ? strtoupper(array_rand($latinABC)) : array_rand($latinABC);
     }
     $user['name'] = $name;
     for ($i = 0; $i < $surnameLength; $i++) {
-        $surname .= ($i === 0) ? strtoupper(array_rand(array_flip($latinABC))) : array_rand(array_flip($latinABC));
+        $surname .= ($i === 0) ? strtoupper(array_rand($latinABC)) : array_rand($latinABC);
     }
     $user['surname'] = $surname;
 }
