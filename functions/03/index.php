@@ -14,8 +14,8 @@ echo 'Code: '.$randomString;
 echo '<br><br>';
 
 function numbersToH1($string) {
-    $string = preg_replace_callback('/[a-zA-Z]+/', function($matches){return ' ';}, $string);
-    $string = preg_replace_callback('/[0-9]+/', function($matches){return textToH1($matches[0]);}, $string);   
+    $string = preg_replace_callback('/\D+/', function($matches){return ' ';}, $string);
+    $string = preg_replace_callback('/\d+/', function($matches){return textToH1($matches[0]);}, $string);   
     return $string;
 }
 

@@ -17,22 +17,21 @@ echo '<pre>';
 $generatedArray = generateRecursiveArray(rand(10, 30));
 print_r($generatedArray);
 
-
 echo '<br><br>';
 
 echo 'Uzduotis Nr. 8 <br>';
 echo 'Suskaičiuokite septinto uždavinio elementų, kurie nėra masyvai, sumą.<br><br>';
 
 function countRecursiveArrayValues($array) {
-    $value = 0;
-    foreach ($array as $inside) {
-        if (is_numeric($inside)) {
-            $value += $inside;
-        } else if (is_array($inside)) {
-            $value += countRecursiveArrayValues($inside);
+    $sum = 0;
+    foreach ($array as $element) {
+        if (is_numeric($element)) {
+            $sum += $element;
+        } else if (is_array($element)) {
+            $sum += countRecursiveArrayValues($element);
         }
     }
-    return $value;
+    return $sum;
 }
 
 echo 'Masyvo reiksmiu suma : '.countRecursiveArrayValues($generatedArray);

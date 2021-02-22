@@ -7,7 +7,6 @@ echo 'Sugeneruokite masyvą iš 100 elementų, kurio reikšmės atsitiktiniai sk
 
 function checkDividers($number) {
     $number = sqrt(pow(intval($number), 2));
-    $count = 0;
     $dividers = [];
     for ($i = 2; $i < $number; $i++) {
         if ($number % $i == 0) {
@@ -29,6 +28,9 @@ echo 'Masyvas: '.implode(', ', $randomNumbers).'<br><br>';
 usort($randomNumbers, 'sortByDividerCount');
 
 echo 'Surusiuota pagal dalikliu kieki : ';
+
+/* echo '<pre>';
+print_r($randomNumbers); */
 foreach($randomNumbers as $value) {
     echo $value.'['.checkDividers($value)['count'].']; ';
 }

@@ -23,6 +23,6 @@ foreach (range(1, 100) as $_) {
 echo 'Masyvas: '.implode(', ', $randomNumbers).'<br><br>';
 
 foreach($randomNumbers as $index => $value) {
-    if (0 != checkDividers($value)['count']) unset($randomNumbers[$index]);
+    if (0 == checkDividers($value)['count']) unset($randomNumbers[$index]);
 }
-echo 'Palikti pirminiai skaiciai: '.implode(', ', $randomNumbers).'<br><br>';
+echo 'Vien ne pirminiai skaiciai: '.implode(', ', $randomNumbers).'<br><br>';

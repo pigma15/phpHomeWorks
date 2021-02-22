@@ -12,9 +12,7 @@ function checkDividers(/* int */ $number) {
     $count = 0;
     $dividers = [];
     for ($i = 2; $i < $number; $i++) {
-        if ($number % $i == 0) {
-            $dividers[] = $i;
-        }
+        if ($number % $i == 0) $dividers[] = $i;
     }
     return ['number' => $number, 'dividers' => $dividers, 'count' => count($dividers)];
 };
