@@ -7,7 +7,6 @@ echo 'Sugeneruokite masyvą iš 10 elementų, kurie yra masyvai iš 10 elementų
 
 function isPrime($number) {
     if (0 == $number || 1 == $number) return false;
-    if (2 == $number) return true;
     for ($i = 2; $i < $number; $i++) {
         if ($number % $i == 0) return false; 
     }
