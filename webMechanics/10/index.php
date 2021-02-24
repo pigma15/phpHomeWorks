@@ -9,7 +9,7 @@ if (empty($_POST) && empty($_GET)) {
 if (empty($_POST)) {
     $amount = isset($_GET['amount']) ? $_GET['amount'] : 0;
     $bgColor = isset($_GET['bgColor']) ? '#'.$_GET['bgColor'] : '#d4d';
-    $fontColor = isset($_GET['fontColor']) ? '#'.$_GET['fontColor'] : '#d4d';
+    $fontColor = isset($_GET['fontColor']) ? '#'.$_GET['fontColor'] : '#2d2';
     if (isset($_GET['submitted'])) {
         $checks = isset($_GET['checks']) ? $_GET['checks'] : 0;
         $form = '<span style="display: inline-block; font-size: 30px;">'.$checks.' out of '.$amount.'</span>';
