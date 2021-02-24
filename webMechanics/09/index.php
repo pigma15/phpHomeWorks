@@ -3,7 +3,7 @@ if (empty($_POST)) {
     $form = '<form action="" method="post">';
     $amount = rand(3, 10);
     foreach (range(3, $amount) as $_) {
-        $form .= '<input type="checkbox" name="checks[]" value="1">';;
+        $form .= '<input type="checkbox" name="checks[]" value="1">';
     }
     $form .= '<input type="submit" name="check"></form>';
     $bgColor = '#222';
