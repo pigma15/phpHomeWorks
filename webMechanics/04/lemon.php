@@ -1,5 +1,6 @@
 <?php 
 header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/04/orange.php');
+exit;
 ?>
 
 <!DOCTYPE html>

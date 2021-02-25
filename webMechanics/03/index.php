@@ -15,7 +15,7 @@
     <p style="color: #ddd;">Perdarykite 2 uždavinį taip, kad spalvą būtų galimą įrašyti į laukelį ir ją išsiųsti mygtuku GET metodu formoje.</p>
 
     <form action="" method="get">
-        <input type="text" name="color" value="">
+        <input type="text" name="color">
         <input type="submit">
     </form>
 
