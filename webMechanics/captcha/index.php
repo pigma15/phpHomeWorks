@@ -22,11 +22,11 @@ elseif (isset($_GET['answer'])) {
     if ($answer == $_GET['answer']) {
         $print = '<h1>Jus - ne Robotas</h1>';
         $h1color = '#191';
-        $lightColor = '#df9';
+        $lightColor = '#191';
     } else {
         $print = '<h1>Jus esate Robotas</h1>';
         $h1color = '#911';
-        $lightColor = '#f97';
+        $lightColor = '#911';
     }
     $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a><div class="light">';
 }
@@ -95,60 +95,60 @@ else {
             animation: light 3s linear infinite alternate;
             border-radius: 4px;
             box-shadow: 0 0 6px 4px #ffb,
-                        0 0 4px 3px #fff;
+                        0 0 4px 3px inset #fff;
         }
         @keyframes light {
             0% {
                 margin-left: -100%;
                 box-shadow: 20px 0 20px 5px #ffb,
-                            0 0 4px 4px #fdd;
+                            0 0 4px 4px inset #fdd;
             }
             20% {
                 margin-left: -60%;
                 box-shadow: 12px 0 18px 5px #fff,
-                            0 0 3px 3px #fed;
+                            0 0 3px 3px inset #fed;
 
             }
             25% {
                 margin-left: -50%;
                 box-shadow: 10px 0 14px 6px #fee,
-                            0 0 4px 1px #fda;
+                            0 0 4px 1px inset #fda;
 
             }
             40% {
                 margin-left: -20%;
                 box-shadow: 4px 0 16px 1px #afb,
-                            0 0 4px 4px #fcf;
+                            0 0 4px 4px inset #fcf;
 
             }
             50% {
                 margin-left: 0%;
                 box-shadow: 0 0 6px 4px #ffb,
-                            0 0 4px 3px #fff;
+                            0 0 4px 3px inset #fff;
 
             }
             60% {
                 margin-left: 20%;
                 box-shadow: -4px 0 12px 3px #dfa,
-                            0 0 1px 5px #eca;
+                            0 0 1px 5px inset #eca;
 
             }
             75% {
                 margin-left: 50%;
                 box-shadow: -10px 0 4px 6px #cfe,
-                            0 0 6px 4px #fdf;
+                            0 0 6px 4px inset #fdf;
 
             }
             80% {
                 margin-left: 60%;
                 box-shadow: -12px 0 8px 5px #fff,
-                            0 0 3px 3px #fed;
+                            0 0 3px 3px inset #fed;
 
             }
             100% {
                 margin-left: 100%;
                 box-shadow: -20px 0 20px 5px #ffb,
-                            0 0 4px 4px #fdd;
+                            0 0 4px 4px inset #fdd;
             }
         }
         form {
