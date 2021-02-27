@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     $sum = isset($_POST['check']) ? array_sum($_POST['check']) : 0;
     if (687 == $sum) {
         $correct = substr(md5(rand()), 0, rand(6, 9));
-        $_SESSION['answer'] = $correct;
+        $_SESSION['correct'] = $correct;
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$correct);
         exit;
     } else {
@@ -14,13 +14,9 @@ if (isset($_POST['submit'])) {
     }
 }
 elseif (isset($_GET['answer'])) {
-    if (isset($_SESSION['answer'])) {
-        $answer = $_SESSION['answer'];
-        unset($_SESSION['answer']);
-    } else {
-        $answer = substr(md5(rand()), 0, rand(10, 12));
-    }
-    if ($answer == $_GET['answer']) {
+    $answer = isset($_SESSION['correct']) ? $_SESSION['correct'] : substr(md5(rand()), 0, rand(10, 12));
+    if (isset($_SESSION['correct']) && $answer == $_GET['answer']) {
+        unset($_SESSION['correct']);
         $print = '<h1>Jus - ne Robotas</h1>';
         $h1color = '#191';
         $lightColor = '#191';
