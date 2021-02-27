@@ -18,11 +18,11 @@ elseif (isset($_GET['answer'])) {
     if (isset($_SESSION['correct']) && $answer == $_GET['answer']) {
         unset($_SESSION['correct']);
         $print = '<h1>Jus - ne Robotas</h1>';
-        $h1color = '#191';
+        $h1color = '#161';
         $lightColor = '#191';
     } else {
         $print = '<h1>Jus esate Robotas</h1>';
-        $h1color = '#911';
+        $h1color = '#611';
         $lightColor = '#911';
     }
     $print .= '<div class="light"></div><a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a>';
@@ -81,8 +81,12 @@ else {
         }
         h1 {
             display: inline-block;
-            margin-top: 50px;
-            width: 100%;
+            width: 70%;
+            height: auto;
+            padding: 22px 0;
+            margin: 40px 25%;
+            background: linear-gradient(0.7turn, #aba3, #dcd6);
+            border-radius: 18px;
             text-align: center;
             color: <?=$h1color?>;
         }
@@ -162,7 +166,16 @@ else {
             place-items: center;
             width: 100px;
             height: 100px;
+            transform: scale(1);
+            z-index: 0;
             overflow: hidden;
+            border-radius: 0;
+            transition: 0.25s ease-in-out;
+        }
+        .slot:hover {
+            transform: scale(1.5);
+            z-index: 100;
+            border-radius: 16px;
         }
         input {
             display: none;
@@ -174,9 +187,12 @@ else {
             background: #ddd center;
             background-size: cover;
             cursor: pointer;
+            filter: blur(0) saturate(1) contrast(1);
+            box-shadow: 0 0 0 0 inset #111e;
+            transition: 0.5s ease-in-out;
         }
         :checked + label {
-            filter: blur(10px) saturate(0);
+            filter: blur(10px) saturate(0) contrast(0.5);
             box-shadow: 0 0 10px 10px inset #111e;
         }
         button {
@@ -185,12 +201,19 @@ else {
             grid-column: 1/4;
             margin: 20px;
             cursor: pointer;
-            border: 3px solid #231;
+            border: 2px solid #231;
             border-radius: 8px;
             background: linear-gradient(0.25turn, #68b7, #bcb8, #afe5);
             box-shadow: 1px 1px 3px 1px #1118,
                         0 0 5px 3px inset #cdc8,
                         0 0 10px 4px #1114;
+            transition: 0.5s ease-in-out;
+        }
+        button:hover {
+            border: 2px solid #bca;
+            box-shadow: 1px 1px 3px 1px #1118,
+                        0 0 8px 5px inset #cdc8,
+                        0 0 20px 4px #aaa4;
         }
         a {
             display: inline-block;
@@ -207,6 +230,13 @@ else {
             box-shadow: 1px 1px 3px 1px #1118,
                         0 0 5px 3px inset #cdc8,
                         0 0 10px 4px #1114;
+            transition: 0.5s ease-in-out;
+        }
+        a:hover {
+            border: 3px solid #bca;
+            box-shadow: 1px 1px 3px 1px #1118,
+                        0 0 8px 5px inset #cdc8,
+                        0 0 20px 4px #aaa4;
         }
     </style>
 </head>
