@@ -2,12 +2,12 @@
 if (isset($_POST['submit'])) {
     $sum = isset($_POST['check']) ? array_sum($_POST['check']) : 0;
     if (687 == $sum) {
-        $correct = md5(rand());
+        $correct = substr(md5(rand()), 0, rand(6, 9));
         setcookie('answer', $correct);
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$correct);
         exit;
     } else {
-        $wrong = md5(rand());
+        $wrong = substr(md5(rand()), 0, rand(6, 9));
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$wrong);
         exit;
     }
@@ -17,7 +17,7 @@ elseif (isset($_GET['answer'])) {
         $answer = $_COOKIE['answer'];
         setcookie('answer', '', time() - 9999);
     } else {
-        $answer = -1;
+        $answer = substr(md5(rand()), 0, rand(10, 12));
     }
     if ($answer == $_GET['answer']) {
         $print = '<h1>Jus - ne Robotas</h1>';
