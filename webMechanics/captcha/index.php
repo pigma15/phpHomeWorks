@@ -1,31 +1,49 @@
 <?php
-if (isset($_GET['submit'])) {
-    $sum = isset($_GET['check']) ? array_sum($_GET['check']) : 0;
-    if ($sum == 687) {
+if (isset($_POST['submit'])) {
+    $sum = isset($_POST['check']) ? array_sum($_POST['check']) : 0;
+    if (687 == $sum) {
+        $correct = md5(rand());
+        setcookie('answer', $correct);
+        header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$correct);
+        exit;
+    } else {
+        $wrong = md5(rand());
+        header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$wrong);
+        exit;
+    }
+}
+elseif (isset($_GET['answer'])) {
+    if (isset($_COOKIE['answer'])) {
+        $answer = $_COOKIE['answer'];
+        setcookie('answer', '', time() - 9999);
+    } else {
+        $answer = -1;
+    }
+    if ($answer == $_GET['answer']) {
         $print = '<h1>Jus - ne Robotas</h1>';
         $h1color = '#191';
         $lightColor = '#df9';
     } else {
         $print = '<h1>Jus esate Robotas</h1>';
         $h1color = '#911';
-        $lightColor = '#fa9';
+        $lightColor = '#f97';
     }
     $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a><div class="light">';
 }
 else {
     $squaresData = [
-        ['link' => './img/arp.png', 'count' => 26],
-        ['link' => './img/cat.jpg', 'count' => 842],
-        ['link' => './img/dog.png', 'count' => 612],
-        ['link' => './img/easel.jpg', 'count' => 220],
-        ['link' => './img/go9.jpg', 'count' => 9999],
-        ['link' => './img/mini.jpg', 'count' => 200],
-        ['link' => './img/ms20.png', 'count' => 88],
-        ['link' => './img/termosas.jpg', 'count' => 670],
-        ['link' => './img/vcs3.jpg', 'count' => 153],
+        ['link' => './img/1.png', 'count' => 26],
+        ['link' => './img/2.jpg', 'count' => 842],
+        ['link' => './img/3.png', 'count' => 612],
+        ['link' => './img/4.jpg', 'count' => 220],
+        ['link' => './img/5.jpg', 'count' => 200],
+        ['link' => './img/6.png', 'count' => 88],
+        ['link' => './img/7.jpg', 'count' => 670],
+        ['link' => './img/8.jpg', 'count' => 153],
+        ['link' => './img/9.jpg', 'count' => 999]
     ];
     
-    $print = '<h1>Paveikslelius, kuriuose nera sintezatoriu, palikite ryskius</h1><div class="light"></div><form>';
+    $print = '<h1>Paveikslelius, kuriuose nera sintezatoriu, palikite ryskius</h1><div class="light"></div><form method="post">';
     $id = 0;
     while (0 < count($squaresData)) {
         $temp = rand(0, count($squaresData) - 1);
@@ -74,7 +92,7 @@ else {
             background: <?=$lightColor?>;
             width: 8%;
             height: 18px;
-            animation: light 5s linear infinite alternate;
+            animation: light 3s linear infinite alternate;
             border-radius: 4px;
             box-shadow: 0 0 6px 4px #ffb,
                         0 0 4px 3px #fff;
@@ -87,13 +105,13 @@ else {
             }
             20% {
                 margin-left: -60%;
-                box-shadow: 12px 0 8px 5px #fff,
+                box-shadow: 12px 0 18px 5px #fff,
                             0 0 3px 3px #fed;
 
             }
             25% {
                 margin-left: -50%;
-                box-shadow: 10px 0 22px 6px #fee,
+                box-shadow: 10px 0 14px 6px #fee,
                             0 0 4px 1px #fda;
 
             }
