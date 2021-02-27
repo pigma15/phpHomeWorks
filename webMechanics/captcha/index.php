@@ -1,9 +1,10 @@
 <?php
+session_start();
 if (isset($_POST['submit'])) {
     $sum = isset($_POST['check']) ? array_sum($_POST['check']) : 0;
     if (687 == $sum) {
         $correct = substr(md5(rand()), 0, rand(6, 9));
-        setcookie('answer', $correct);
+        $_SESSION['answer'] = $correct;
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$correct);
         exit;
     } else {
@@ -13,9 +14,9 @@ if (isset($_POST['submit'])) {
     }
 }
 elseif (isset($_GET['answer'])) {
-    if (isset($_COOKIE['answer'])) {
-        $answer = $_COOKIE['answer'];
-        setcookie('answer', '', time() - 9999);
+    if (isset($_SESSION['answer'])) {
+        $answer = $_SESSION['answer'];
+        unset($_SESSION['answer']);
     } else {
         $answer = substr(md5(rand()), 0, rand(10, 12));
     }
