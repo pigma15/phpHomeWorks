@@ -8,7 +8,7 @@ if (isset($_GET['submit'])) {
         $h1color = '#911';
         $print = '<h1>Jus esate Robotas</h1>';
     }
-    $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a>';
+    $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a><div class="light">';
 }
 else {
     $squaresData = [
@@ -166,7 +166,7 @@ else {
         }
         a {
             margin-top: 50px;
-            color: #333;
+            color: #232;
         }
     </style>
 </head>
