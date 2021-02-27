@@ -175,6 +175,7 @@ else {
             height: 100%;
             background: #ddd center;
             background-size: cover;
+            cursor: pointer;
         }
         :checked + label{
             filter: blur(10px) saturate(0);
@@ -185,6 +186,7 @@ else {
             place-items: center;
             grid-column: 1/4;
             margin: 20px;
+            cursor: pointer;
         }
         a {
             margin-top: 50px;
