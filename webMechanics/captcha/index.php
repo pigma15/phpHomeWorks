@@ -2,11 +2,13 @@
 if (isset($_GET['submit'])) {
     $sum = isset($_GET['check']) ? array_sum($_GET['check']) : 0;
     if ($sum == 687) {
-        $h1color = '#191';
         $print = '<h1>Jus - ne Robotas</h1>';
+        $h1color = '#191';
+        $lightColor = '#df9';
     } else {
-        $h1color = '#911';
         $print = '<h1>Jus esate Robotas</h1>';
+        $h1color = '#911';
+        $lightColor = '#fa9';
     }
     $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a><div class="light">';
 }
@@ -36,6 +38,7 @@ else {
     }
     $print .= '<button type="submit" name="submit">Ar Jus Robotas?</button></form>';
     $h1color = '#222';
+    $lightColor = '#efa';
 }
 ?>
 
@@ -68,7 +71,7 @@ else {
         }
         .light {
             display: inline-block;
-            background: #efa;
+            background: <?=$lightColor?>;
             width: 8%;
             height: 18px;
             animation: light 5s linear infinite alternate;
