@@ -29,7 +29,7 @@ elseif (isset($_GET['answer'])) {
         $h1color = '#911';
         $lightColor = '#911';
     }
-    $print .= '<a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a><div class="light">';
+    $print .= '<div class="light"></div><a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a>';
 }
 else {
     $squaresData = [
@@ -47,12 +47,12 @@ else {
     $print = '<h1>Paveikslelius, kuriuose nera sintezatoriu, palikite ryskius</h1><div class="light"></div><form method="post">';
     $id = 0;
     while (0 < count($squaresData)) {
-        $temp = rand(0, count($squaresData) - 1);
+        $squareIndex = rand(0, count($squaresData) - 1);
         $print .= '<div class="slot">
-                    <input type="checkbox" name="check[]" value="'.$squaresData[$temp]['count'].'" id="'.$id.'"/>
-                    <label style="background-image: url('.$squaresData[$temp]['link'].');" for="'.$id.'"></label>
+                    <input type="checkbox" name="check[]" value="'.$squaresData[$squareIndex]['count'].'" id="'.$id.'"/>
+                    <label style="background-image: url('.$squaresData[$squareIndex]['link'].');" for="'.$id.'"></label>
                 </div>';
-        array_splice($squaresData, $temp, 1);
+        array_splice($squaresData, $squareIndex, 1);
         $id++;
     }
     $print .= '<button type="submit" name="submit">Ar Jus Robotas?</button></form>';
@@ -74,6 +74,7 @@ else {
             margin: 0;
             padding: 0;
             font-family: sans-serif;
+            box-sizing: border-box;
         }
         body {
             background: #9ba;
@@ -178,7 +179,7 @@ else {
             background-size: cover;
             cursor: pointer;
         }
-        :checked + label{
+        :checked + label {
             filter: blur(10px) saturate(0);
             box-shadow: 0 0 10px 10px inset #111e;
         }
@@ -188,10 +189,28 @@ else {
             grid-column: 1/4;
             margin: 20px;
             cursor: pointer;
+            border: 3px solid #231;
+            border-radius: 8px;
+            background: linear-gradient(0.25turn, #68b7, #bcb8, #afe5);
+            box-shadow: 1px 1px 3px 1px #1118,
+                        0 0 5px 3px inset #cdc8,
+                        0 0 10px 4px #1114;
         }
         a {
-            margin-top: 50px;
+            display: inline-block;
+            width: 50%;
+            height: auto;
+            text-align: center;
+            margin: 30px 25%;
+            font-size: 20px;
+            line-height: 50px;
+            background: #eff3;
             color: #232;
+            border-radius: 10px;
+            border: 3px solid #231;
+            box-shadow: 1px 1px 3px 1px #1118,
+                        0 0 5px 3px inset #cdc8,
+                        0 0 10px 4px #1114;
         }
     </style>
 </head>
