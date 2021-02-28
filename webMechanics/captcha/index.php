@@ -14,6 +14,10 @@ if (isset($_POST['submit'])) {
     }
 }
 elseif (isset($_GET['answer'])) {
+    if (preg_match('/[<,>]/', $_GET['answer'])) {
+        header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?please=donthack');
+        exit;
+    }
     $answer = isset($_SESSION['correct']) ? $_SESSION['correct'] : substr(md5(rand()), 0, rand(10, 12));
     if (isset($_SESSION['correct']) && $answer == $_GET['answer']) {
         unset($_SESSION['correct']);
