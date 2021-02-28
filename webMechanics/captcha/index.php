@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST['submit'])) {
     $sum = isset($_POST['check']) ? array_sum($_POST['check']) : 0;
-    if (687 == $sum) {
+    if (687 == $sum && 5 == count($_POST['check'])) {
         $correct = substr(md5(rand()), 0, rand(6, 9));
         $_SESSION['correct'] = $correct;
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?answer='.$correct);
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     }
 }
 elseif (isset($_GET['answer'])) {
-    if (preg_match('/[<,>]/', $_GET['answer'])) {
+    if (preg_match('/[<>()]+/', $_GET['answer'])) {
         header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/?please=donthack');
         exit;
     }
@@ -196,6 +196,7 @@ else {
         .slot {
             display: grid;
             place-items: center;
+            background: #aaae;
             width: 100px;
             height: 100px;
             transform: scale(1);
@@ -205,7 +206,7 @@ else {
             transition: 0.25s ease-in-out;
         }
         .slot:hover {
-            transform: scale(1.5);
+            transform: scale(1.6);
             z-index: 100;
             border-radius: 16px;
         }
@@ -222,6 +223,7 @@ else {
             filter: blur(0) saturate(1) contrast(1);
             box-shadow: 0 0 0 0 inset #111e;
             transition: 0.5s ease-in-out;
+            transform: scale(1);
         }
         :checked + label {
             filter: blur(10px) saturate(0) contrast(0.5);
