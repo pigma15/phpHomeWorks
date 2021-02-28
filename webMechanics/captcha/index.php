@@ -17,12 +17,16 @@ elseif (isset($_GET['answer'])) {
     $answer = isset($_SESSION['correct']) ? $_SESSION['correct'] : substr(md5(rand()), 0, rand(10, 12));
     if (isset($_SESSION['correct']) && $answer == $_GET['answer']) {
         unset($_SESSION['correct']);
-        $print = '<h1>Jus - ne Robotas</h1>';
+        $print = '<h1>Jūs - ne Robotas</h1>';
         $h1color = '#161';
+        $h1bordercolor = '#161e';
+        $h1bordercolor2 = '#191a';
         $lightColor = '#191';
     } else {
-        $print = '<h1>Jus esate Robotas</h1>';
+        $print = '<h1>Jūs esate Robotas</h1>';
         $h1color = '#611';
+        $h1bordercolor = '#611e';
+        $h1bordercolor2 = '#9116';
         $lightColor = '#911';
     }
     $print .= '<div class="light"></div><a href="http://localhost:8888/bit/phpHomeWorks/webMechanics/captcha/">Bandykite dar karta</a>';
@@ -40,7 +44,7 @@ else {
         ['link' => './img/9.jpg', 'count' => 999]
     ];
     
-    $print = '<h1>Paveikslelius, kuriuose nera sintezatoriu, palikite ryskius</h1><div class="light"></div><form method="post">';
+    $print = '<h1>Paveikslėlius, kuriuose nėra sintezatorių, palikite ryškius</h1><div class="light"></div><form method="post">';
     $id = 0;
     while (0 < count($squaresData)) {
         $squareIndex = rand(0, count($squaresData) - 1);
@@ -51,8 +55,10 @@ else {
         array_splice($squaresData, $squareIndex, 1);
         $id++;
     }
-    $print .= '<button type="submit" name="submit">Ar Jus Robotas?</button></form>';
+    $print .= '<button type="submit" name="submit">Ar Jūs Robotas?</button></form>';
     $h1color = '#222';
+    $h1bordercolor = '#eee4';
+    $h1bordercolor2 = '#eeee';
     $lightColor = '#efa';
 }
 ?>
@@ -86,9 +92,31 @@ else {
             padding: 22px 0;
             margin: 40px 25%;
             background: linear-gradient(0.7turn, #aba3, #dcd6);
+            border: 2px solid <?=$h1bordercolor?>;
             border-radius: 18px;
             text-align: center;
             color: <?=$h1color?>;
+            animation: neon 0.65s ease-in-out;
+            animation-iteration-count: 3;
+            box-shadow: 0 0 2px 1px <?=$h1bordercolor2?>,
+                        0 0 3px 2px inset <?=$h1bordercolor2?>;
+        }
+        @keyframes neon {
+            0% {
+                border: 2px solid <?=$h1bordercolor?>;
+                box-shadow: 0 0 2px 1px <?=$h1bordercolor2?>,
+                            0 0 3px 2px inset <?=$h1bordercolor2?>;
+            }
+            50% {
+                border: 2px solid <?=$h1bordercolor2?>;
+                box-shadow: 0 0 10px 3px <?=$h1bordercolor?>,
+                            0 0 12px 4px inset <?=$h1bordercolor?>;
+            }
+            100% {
+                border: 2px solid <?=$h1bordercolor?>;
+                box-shadow: 0 0 2px 1px <?=$h1bordercolor2?>,
+                            0 0 3px 2px inset <?=$h1bordercolor2?>;
+            }
         }
         .light {
             display: inline-block;
