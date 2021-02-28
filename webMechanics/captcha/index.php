@@ -88,6 +88,7 @@ else {
             display: grid;
             place-items: center;
             min-height: 100vh;
+            overflow: hidden;
         }
         h1 {
             display: inline-block;
@@ -203,12 +204,28 @@ else {
             z-index: 0;
             overflow: hidden;
             border-radius: 0;
+            filter: sepia(0%) brightness(100%);
             transition: 0.25s ease-in-out;
         }
         .slot:hover {
             transform: scale(1.6);
             z-index: 100;
             border-radius: 16px;
+            animation: sepia 0.5s ease;
+        }
+        @keyframes sepia {
+            0% {
+                transform: scale(1.6);
+                filter: sepia(0%) brightness(100%);
+            }
+            33% {
+                transform: scale(2);
+                filter: sepia(70%) brightness(50%);
+            }
+            100% {
+                transform: scale(1.6);
+                filter: sepia(0%) brightness(100%);
+            }
         }
         input {
             display: none;
@@ -221,7 +238,7 @@ else {
             background-size: cover;
             cursor: pointer;
             filter: blur(0) saturate(1) contrast(1);
-            box-shadow: 0 0 0 0 inset #111e;
+            box-shadow: 0 0 1px 1px inset #1114;
             transition: 0.5s ease-in-out;
             transform: scale(1);
         }
