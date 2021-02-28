@@ -1,0 +1,26 @@
+body {
+    display: inline-block;
+    width: 100%;
+    min-height: 300vh;
+    background: #ddd;
+    background-repeat: no-repeat;
+    background-position: 50% 0px;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    backdrop-filter: saturate(50%);
+}
+.nav {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 120px;
+    background: #ddd;
+}
+form.newacc {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 30px 100px;
+    width: calc(100% - 200px);
+    background: #ddd6;
+    font-size: 2rem;
+}
