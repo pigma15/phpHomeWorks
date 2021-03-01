@@ -17,7 +17,7 @@ if(isset($_GET['swap'])) {
 
     <p style="color: #aaa;">Sukurkite du atskirus puslapius blue.php ir red.php Juose sukurkite linkus į pačius save (abu į save ne į kitą puslapį!). Padarykite taip, kad paspaudus ant  linko puslapis ne tiesiog persikrautų, o PHP kodas (ne tiesiogiai html tagas!) naršyklę peradresuotų į kitą puslapį (iš raudono į mėlyną ir atvirkščiai).</p>
 
-    <a style='color: #aaa; background: #aaa4;' href="?swap=">SWAP</a>
+    <a style='color: #aaa; background: #aaa4; padding: 10px' href="?swap=">SWAP</a>
     
 </body>
 </html>
