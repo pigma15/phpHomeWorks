@@ -1,11 +1,9 @@
 <?php
-if (!isset($_GET['fromPink'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/08/pink.php');
     exit;
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

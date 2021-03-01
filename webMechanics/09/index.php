@@ -1,6 +1,6 @@
 <?php
 if (empty($_POST)) {
-    $form = '<form action="" method="post">';
+    $form = '<form method="post">';
     $amount = rand(3, 10);
     foreach (range(3, $amount) as $_) {
         $form .= '<input type="checkbox" name="checks[]" value="1">';
