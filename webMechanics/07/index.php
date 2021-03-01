@@ -1,10 +1,10 @@
 <?php 
 
 if(!empty($_POST)) {
-    header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/07/?isPost=POST');
+    header('Location: http://localhost:8888/bit/phpHomeWorks/webMechanics/07/?from=post');
     exit;
 }
-if (!empty($_GET) && !isset($_GET['isPost'])) {
+if (!empty($_GET) && !isset($_GET['from'])) {
     $color = 'green';
 } else {
     $color = 'yellow';
