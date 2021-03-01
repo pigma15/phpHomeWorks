@@ -36,7 +36,7 @@
         if (!isset($_GET['personID'])) {
             echo 'nera personID';
         } else {
-            if (preg_match('/^[34][\d]{10}$/', $_GET['personID']) ) {
+            if (preg_match('/^[34][\d]{10}$/', $_GET['personID'])) {
                 echo htmlspecialchars($_GET['personID']);
             } else {
                 echo 'netinka personID';
