@@ -3,36 +3,48 @@
     $database = json_decode(file_get_contents(__DIR__.'/bank.json'), true);
 
     if (!empty($_POST)) {
+        if(!isset($_POST['id']) || !array_key_exists($_POST['id'], $database['users'])) {
+            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+            exit;
+        }
         if (isset($_POST['change'])) {
             if (isset($_POST['amount']) && preg_match('/^[0-9]+[.]?[0-9]{0,2}$/', $_POST['amount'])) {
-                if (isset($_POST['id']) && array_key_exists($_POST['id'], $database['users'])) {
-                    if ('add' == $_POST['change']) {
-                        $database['users'][$_POST['id']]['creditAmount'] += $_POST['amount'];
+                if ('add' == $_POST['change']) {
+                    $database['users'][$_POST['id']]['creditAmount'] += $_POST['amount'];
+                    file_put_contents(__DIR__.'/bank.json', json_encode($database));
+                    session_destroy();
+                    header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+                    exit;
+                } elseif ('remove' == $_POST['change']) {
+                    if (0 <= ($database['users'][$_POST['id']]['creditAmount'] - $_POST['amount'])) {
+                        $database['users'][$_POST['id']]['creditAmount'] -= $_POST['amount'];
                         file_put_contents(__DIR__.'/bank.json', json_encode($database));
                         session_destroy();
                         header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
                         exit;
-                    } elseif ('remove' == $_POST['change']) {
-                        if (0 <= ($database['users'][$_POST['id']]['creditAmount'] - $_POST['amount'])) {
-                            $database['users'][$_POST['id']]['creditAmount'] -= $_POST['amount'];
-                            file_put_contents(__DIR__.'/bank.json', json_encode($database));
-                            session_destroy();
-                            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                            exit;
-                        } else {
-                            $_SESSION['errors'][$_POST['id']] = 'Not enough credit';
-                            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'?error=');
-                            exit;
-                        }
+                    } else {
+                        $_SESSION['errors'][$_POST['id']] = 'Not enough credit';
+                        header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+                        exit;
                     }
                 }
             } else {
                 $_SESSION['errors'][$_POST['id']] = 'Invalid value';
-                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'?error=');
+                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
                 exit;
             }
         } elseif (isset($_POST['delete'])) {
-            
+            if (0 == $database['users'][$_POST['id']]['creditAmount']) {
+                unset($database['users'][$_POST['id']]);
+                file_put_contents(__DIR__.'/bank.json', json_encode($database));
+                session_destroy();
+                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+                exit;
+            } else {
+                $_SESSION['errors'][$_POST['id']] = 'Account is not empty';
+                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+                exit;
+            }
         }
     }
 
