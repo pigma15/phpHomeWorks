@@ -98,6 +98,7 @@
             $database['users'][$id]['creditAmount'] = 0;
             file_put_contents(__DIR__.'/bank.json', json_encode($database));
             header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'table.php');
+            session_destroy();
             exit;
         }
     }

@@ -15,7 +15,9 @@
                 <span style="grid-column: auto / span 3">Actions</span>
             </div>';
 
+
     foreach($database['users'] as $id => $user) {
+        if(isset($_GET['id'])) $error = $id == $_GET['id'] ? 'netinka' : '';
         $table .= '<div class="line" style="'.$lineStyle.'">';
         foreach($user as $key => $value) {
             $gridSpan = 1;
@@ -23,11 +25,16 @@
             if ('personID' == $key) $gridSpan = 2;
             $table .= '<div class="value" style="grid-column: auto / span '.$gridSpan.'">'.$value.'</div>';
         }
-        $table .= '<form class"buttons" style="grid-column: auto / span 3">
-                    <input class"add" type="submit" name="add" value="Add credit">
-                    <input class"remove" type="submit" name="remove" value="Remove credit">
-                    <input class"delete" type="submit" name="delete" value="Delete account">
+        $table .= '<form class="actions" style="grid-column: auto / span 3">
+                    <input class="remove hidden" type="submit" name="change" id="remove'.$id.'" value="remove">
+                    <label for="remove'.$id.'">-</label>
+                    <input class="amount" type="text" name="amount">
+                    <input class="add hidden" type="submit" name="change" id="add'.$id.'" value="add">
+                    <label for="add'.$id.'">+</label>
+                    <input class="delete hidden" type="submit" name="delete" id="delete'.$id.'" value="delete">
+                    <label for="delete'.$id.'">DELETE</label>
                     <input type="hidden" name="id" value="'.$id.'">
+                    <span>'. ($error ?? '') .'</span>
                 </form></div>';
 
     }
