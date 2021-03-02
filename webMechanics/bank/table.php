@@ -7,14 +7,14 @@
             if (isset($_POST['amount']) && preg_match('/^[0-9]+[.]?[0-9]{0,2}$/', $_POST['amount'])) {
                 if (isset($_POST['id']) && array_key_exists($_POST['id'], $database['users'])) {
                     if ('add' == $_POST['change']) {
-                        $database['users'][$_POST['id']]['creditAmount'] += round($_POST['amount'], 2);
+                        $database['users'][$_POST['id']]['creditAmount'] += $_POST['amount'];
                         file_put_contents(__DIR__.'/bank.json', json_encode($database));
                         session_destroy();
                         header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
                         exit;
                     } elseif ('remove' == $_POST['change']) {
                         if (0 <= ($database['users'][$_POST['id']]['creditAmount'] - $_POST['amount'])) {
-                            $database['users'][$_POST['id']]['creditAmount'] -= round($_POST['amount'], 2);
+                            $database['users'][$_POST['id']]['creditAmount'] -= $_POST['amount'];
                             file_put_contents(__DIR__.'/bank.json', json_encode($database));
                             session_destroy();
                             header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);

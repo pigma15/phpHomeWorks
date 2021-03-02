@@ -1,1 +1,74 @@
-{"users":{"7802d71a2d630690437a1bce444a277e":{"name":"Prima","lastName":"Materia","accNr":"LT202020020220202020","personID":"31802161234","creditAmount":94.01},"8419d3d134b9368ffa5870ae5da93efc":{"name":"Secundo","lastName":"Marmaliado","accNr":"LT212020020220202020","personID":"31902161234","creditAmount":3803188.3999999994},"530d042b9a7597779cb0dace342e7cc8":{"name":"Rupertas","lastName":"Ingvaldas","accNr":"LT202020020220201234","personID":"32406091123","creditAmount":345780},"8697308799680a870a363a4a143dce47":{"name":"Soja","lastName":"Leu","accNr":"LT202020028120301234","personID":"45911032173","creditAmount":867.4300000000001},"9c4d68c7af78e33453b2d81f001ca7b0":{"name":"D'Roge","lastName":"Giorza","accNr":"LT202024528120338234","personID":"47711022743","creditAmount":43},"6cbc5f974970f8c0c418749a61bc9b4f":{"name":"Devyni","lastName":"Vigvamai","accNr":"LT202020060220202033","personID":"39812166671","creditAmount":1300.75},"292cc4df5f3295cc6968864c11632455":{"name":"Uwe","lastName":"Ndani-Bam","accNr":"LT203333020277892021","personID":"45508125463","creditAmount":0},"9d6eaa0b8d6e40499cd7af8a519e553e":{"name":"Novas","lastName":"Gintenberg","accNr":"LT202020560270802020","personID":"36607281342","creditAmount":120},"b2c7a8d0e5695ecfd06f2ad687fed567":{"name":"Tito","lastName":"Gintenberg","accNr":"LT204420020220202020","personID":"45612135573","creditAmount":0},"71697efc6aa44c604f41d75d839a6247":{"name":"Tu","lastName":"InDor","accNr":"LT202033020220202020","personID":"39911224455","creditAmount":0}}}
+{
+    "users": {
+        "7802d71a2d630690437a1bce444a277e": {
+            "name": "Prima",
+            "lastName": "Materia",
+            "accNr": "LT202020020220202020",
+            "personID": "31802161234",
+            "creditAmount": 94.01
+        },
+        "8419d3d134b9368ffa5870ae5da93efc": {
+            "name": "Secundo",
+            "lastName": "Marmaliado",
+            "accNr": "LT212020020220202020",
+            "personID": "31902161234",
+            "creditAmount": 3803188.39
+        },
+        "530d042b9a7597779cb0dace342e7cc8": {
+            "name": "Rupertas",
+            "lastName": "Ingvaldas",
+            "accNr": "LT202020020220201234",
+            "personID": "32406091123",
+            "creditAmount": 345780
+        },
+        "8697308799680a870a363a4a143dce47": {
+            "name": "Soja",
+            "lastName": "Leu",
+            "accNr": "LT202020028120301234",
+            "personID": "45911032173",
+            "creditAmount": 867.43
+        },
+        "9c4d68c7af78e33453b2d81f001ca7b0": {
+            "name": "D'Roge",
+            "lastName": "Giorza",
+            "accNr": "LT202024528120338234",
+            "personID": "47711022743",
+            "creditAmount": 43
+        },
+        "6cbc5f974970f8c0c418749a61bc9b4f": {
+            "name": "Devyni",
+            "lastName": "Vigvamai",
+            "accNr": "LT202020060220202033",
+            "personID": "39812166671",
+            "creditAmount": 1300.75
+        },
+        "292cc4df5f3295cc6968864c11632455": {
+            "name": "Uwe",
+            "lastName": "Ndani-Bam",
+            "accNr": "LT203333020277892021",
+            "personID": "45508125463",
+            "creditAmount": 0
+        },
+        "9d6eaa0b8d6e40499cd7af8a519e553e": {
+            "name": "Novas",
+            "lastName": "Gintenberg",
+            "accNr": "LT202020560270802020",
+            "personID": "36607281342",
+            "creditAmount": 120
+        },
+        "b2c7a8d0e5695ecfd06f2ad687fed567": {
+            "name": "Tito",
+            "lastName": "Gintenberg",
+            "accNr": "LT204420020220202020",
+            "personID": "45612135573",
+            "creditAmount": 0
+        },
+        "71697efc6aa44c604f41d75d839a6247": {
+            "name": "Tu",
+            "lastName": "InDor",
+            "accNr": "LT202033020220202020",
+            "personID": "39911224455",
+            "creditAmount": 0
+        }
+    }
+}
