@@ -1,6 +1,14 @@
 <?php
     session_start();
 
+    $attributes = ['name', 'lastName', 'accNr', 'personID'];
+    if(!isset($_GET['wrong'])) {
+        foreach($attributes as $value) {
+            unset($_SESSION[$value]);
+            unset($_SESSION['errors'][$value]);
+        }
+    }
+
 
     if (isset($_POST['newacc']) && $_POST['newacc'] == 'Submit') {
 
@@ -80,12 +88,11 @@
             }
         }
 
-        $attributes = ['name', 'lastName', 'accNr', 'personID'];
         foreach($attributes as $value) {
             if (isset($_SESSION['errors'][$value])) $errorFound = true;
         }
         if ($errorFound) {
-            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'?wrong=');
             exit;
         } else {
             do {
@@ -97,7 +104,7 @@
             }
             $database['users'][$id]['creditAmount'] = 0;
             file_put_contents(__DIR__.'/bank.json', json_encode($database));
-            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'table.php');
+            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'table.php');
             session_destroy();
             exit;
         }
