@@ -8,9 +8,8 @@ body * {
   margin: 0;
   padding: 0;
   vertical-align: top;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: #333;
 }
 
@@ -26,22 +25,18 @@ body {
   width: 100vmax;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   height: auto;
-  -webkit-filter: saturate(50%);
-          filter: saturate(50%);
+  filter: saturate(50%);
   position: fixed;
   z-index: -100;
 }
 
 .nav {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
-  -webkit-box-shadow: 1px 1px 10px 4px inset #eee6;
-          box-shadow: 1px 1px 10px 4px inset #eee6;
+  box-shadow: 1px 1px 10px 4px inset #eee6;
   -webkit-backdrop-filter: blur(16px) contrast(50%) brightness(150%);
           backdrop-filter: blur(16px) contrast(50%) brightness(150%);
   width: 100%;
@@ -51,11 +46,9 @@ body {
 
 .table {
   background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
-  -webkit-box-shadow: 1px 1px 10px 4px inset #eee6;
-          box-shadow: 1px 1px 10px 4px inset #eee6;
+  box-shadow: 1px 1px 10px 4px inset #eee6;
   -webkit-backdrop-filter: blur(16px) contrast(50%) brightness(150%);
           backdrop-filter: blur(16px) contrast(50%) brightness(150%);
-  display: -ms-grid;
   display: grid;
   margin: 40px 80px;
   width: calc(100% - 160px);
@@ -76,21 +69,18 @@ body {
 }
 
 .table .contents {
-  display: -ms-grid;
   display: grid;
   width: 100%;
   padding: 20px 0;
 }
 
 .table .contents span {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   width: 100%;
 }
 
 .table .line {
-  display: -ms-grid;
   display: grid;
   width: 100%;
   padding: 4px;
@@ -102,7 +92,6 @@ body {
 }
 
 .line .value {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   padding: 5px;
@@ -112,11 +101,9 @@ body {
 }
 
 .line .actions {
-  display: -ms-grid;
   display: grid;
   place-items: center;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   width: 92%;
   margin-left: 4%;
   padding: 0.2rem;
@@ -127,22 +114,19 @@ body {
 }
 
 .actions label {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   background: linear-gradient(0.8turn, #eeee, #eed8, #eeea);
   cursor: pointer;
   border: 1px solid #333a;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
-          box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
+  box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
   width: 70%;
   margin: 0rem 15%;
   height: auto;
 }
 
 .actions .amount {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   width: 100%;
@@ -154,10 +138,9 @@ body {
 }
 
 .actions span {
-  display: -ms-grid;
   display: grid;
   place-items: center;
-  grid-column: auto / span 4;
+  grid-column: auto/span 4;
   width: 100%;
   padding: 0.2rem;
   font-size: 1.4rem;
@@ -166,29 +149,24 @@ body {
 
 form.newacc {
   background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
-  -webkit-box-shadow: 1px 1px 10px 4px inset #eee6;
-          box-shadow: 1px 1px 10px 4px inset #eee6;
+  box-shadow: 1px 1px 10px 4px inset #eee6;
   -webkit-backdrop-filter: blur(16px) contrast(50%) brightness(150%);
           backdrop-filter: blur(16px) contrast(50%) brightness(150%);
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin: 40px 100px;
   width: calc(100% - 200px);
   height: auto;
   font-size: 2rem;
   border: 1px solid transparent;
   border-radius: 1rem;
+  background: blue;
 }
 
 .newacc h2 {
-  display: -ms-grid;
   display: grid;
   place-items: center;
   width: 100%;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
   grid-column: 1/3;
   font-size: 2.7rem;
   padding: 3rem;
@@ -216,17 +194,6 @@ form.newacc {
   padding: 0.4rem 0.2rem;
   float: left;
   background: #eee;
-  border: 2px solid #3336;
-  border-radius: 0.4rem;
-}
-
-.newacc .input.read input {
-  border: 2px solid transparent;
-  background: transparent;
-}
-
-.newacc .input.read input:focus {
-  outline: none;
 }
 
 .newacc .input span {
@@ -241,8 +208,6 @@ form.newacc {
 
 .newacc .submit {
   display: inline-block;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
   grid-column: 1/3;
   width: 75%;
   margin-left: 25%;
@@ -254,12 +219,10 @@ form.newacc {
   cursor: pointer;
   border: 1px solid #333a;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
-          box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
+  box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
   display: inline-block;
   width: calc(33% - 4rem);
   margin: 1rem 3rem 3rem 1rem;
   font-size: 2rem;
   height: 4rem;
 }
-/*# sourceMappingURL=main.css.map */

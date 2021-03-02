@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $database = json_decode(file_get_contents(__DIR__.'/bank.json'), true);
 
     $attributes = ['name', 'lastName', 'accNr', 'personID'];
     if(!isset($_GET['wrong'])) {
@@ -7,6 +8,20 @@
             unset($_SESSION[$value]);
             unset($_SESSION['errors'][$value]);
         }
+    }
+
+    if (!isset($_POST['accNr'])) {
+        do {
+            $accNr = 'LT'.rand(0,9).rand(0,9).'55555';
+            foreach(range(1, 11) as $_) {
+                $accNr .= rand(0, 9);
+            }
+        } while (in_array($accNr, array_column($database['users'], 'accNr')));
+        $_SESSION['accNr'] = $accNr;
+    } else {
+        $accNr = $_POST['accNr'];
+        unset($_POST['accNr']);
+        unset($_SESSION['accNr']);
     }
 
 
@@ -25,7 +40,7 @@
             }
         }
 
-        if (!isset($_POST['lastName'])) {
+        if (!isset($_POST['lastName']) || $_POST['lastName'] == '') {
             $_SESSION['errors']['lastName'] ='Last name can not be empty';
             unset($_SESSION['lastName']);
         } else {
@@ -38,37 +53,31 @@
             }
         }
 
-        $database = json_decode(file_get_contents(__DIR__.'/bank.json'), true);
-        if (!isset($_POST['accNr'])) {
-            $_SESSION['errors']['accNr'] ='Account number can not be empty';
-            unset($_SESSION['accNr']);
-        } else {
-            $accNr = preg_replace_callback('/\s/', function($a){return '';}, $_POST['accNr']);
-            if (preg_match('/^LT[\d]{2}[\d]{5}[\d]{11}$/', $accNr)) {
-                foreach($database['users'] as $user) {
-                    if ($accNr == $user['accNr']) {
-                        $notUniqueAccNr = true;
-                        break;
-                    }
+        if (preg_match('/^LT[\d]{2}55555[\d]{11}$/', $accNr)) {
+            foreach($database['users'] as $user) {
+                if ($accNr == $user['accNr']) {
+                    $notUniqueAccNr = true;
+                    break;
                 }
-                if ($notUniqueAccNr) {
-                    $_SESSION['errors']['accNr'] ='Account number already exists';
-                    unset($_SESSION['accNr']);
-                } else {
-                    $_SESSION['accNr'] = htmlspecialchars($accNr);
-                    unset($_SESSION['errors']['accNr']);
-                }
-            } else {
-                $_SESSION['errors']['accNr'] ='Invalid last account number';
-                unset($_SESSION['accNr']);
             }
+            if ($notUniqueAccNr) {
+                $_SESSION['errors']['accNr'] ='Account number already exists';
+                unset($_SESSION['accNr']);
+            } else {
+                $_SESSION['accNr'] = htmlspecialchars($accNr);
+                unset($_SESSION['errors']['accNr']);
+            }
+        } else {
+            $_SESSION['errors']['accNr'] ='Invalid account number';
+            unset($_SESSION['accNr']);
         }
+
 
         if (!isset($_POST['personID'])) {
             $_SESSION['errors']['personID'] ='Personal ID number can not be empty';
             unset($_SESSION['personID']);
         } else {
-            if (preg_match('/^[34][\d]{10}$/', $_POST['personID']) && substr($_POST['personID'], 3, 2) < 13 && substr($_POST['personID'], 5, 2) < 32) {
+            if (preg_match('/^[1-6][\d]{10}$/', $_POST['personID']) && substr($_POST['personID'], 3, 2) < 13 && substr($_POST['personID'], 5, 2) < 32) {
                 foreach($database['users'] as $user) {
                     if ($_POST['personID'] == $user['personID']) {
                         $notUniquePersonID = true;
@@ -121,7 +130,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Account</title>
-    <link rel="stylesheet" href="./resources/sass/main.css">
+    <link rel="stylesheet" type="text/css" href="./resources/sass/main.css?<?php echo time(); ?>" />
 </head>
 <body>
     <div class="nav"></div>
@@ -142,9 +151,9 @@
                 <?= $_SESSION['errors']['lastName'] ?? '' ?>
             </span>
         </div>
-        <div class="input">
+        <div class="input read">
             <label for="accNr">Account number:</label>
-            <input type="text" name="accNr" placeholder="Account number" id="accNr" value="<?= $_SESSION['accNr'] ?? '' ?>" >
+            <input type="text" name="accNr" placeholder="Account number" id="accNr" value="<?= $_SESSION['accNr'] ?? '' ?>" readonly>
             <span>
                 <?= $_SESSION['errors']['accNr'] ?? '' ?>
             </span>

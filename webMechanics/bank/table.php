@@ -50,9 +50,7 @@
 
 
 
-    $lineLength = count(end($database['users']));
-    $lineStyle = 'grid-template-columns: repeat('.($lineLength + 5).', 1fr)';
-
+    $lineStyle = 'grid-template-columns: repeat(10, 1fr)';
     $table = '<h2>Accounts</h2>
             <div class="contents" style="'.$lineStyle.'">
                 <span style="grid-column: auto / span 1">First name</span>
@@ -62,7 +60,6 @@
                 <span style="grid-column: auto / span 1">Balance</span>
                 <span style="grid-column: auto / span 3">Actions</span>
             </div>';
-
 
     foreach($database['users'] as $id => $user) {
         $error = (isset($_SESSION['errors'][$id]) && array_key_exists($id, $_SESSION['errors'])) ? $_SESSION['errors'][$id] : '';
