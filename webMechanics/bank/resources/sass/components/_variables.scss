@@ -1,0 +1,23 @@
+$fontBlack: #333;
+$fontError: #911;
+$inputBackground: #eee;
+
+@mixin placeCenter {
+    display: grid;
+    place-items: center;
+}
+
+@mixin table {
+    background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
+    box-shadow: 1px 1px 10px 4px inset #eee6;
+    backdrop-filter: blur(16px) contrast(50%) brightness(150%);
+}
+
+@mixin button {
+    background: linear-gradient(0.8turn, #eeee, #eed8, #eeea);
+    cursor: pointer;
+    border: 1px solid #333a;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 2px #3334,
+                0 0 8px 4px inset #eeee;
+}

@@ -104,7 +104,7 @@
             }
             $database['users'][$id]['creditAmount'] = 0;
             file_put_contents(__DIR__.'/bank.json', json_encode($database));
-            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'table.php');
+            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/bit/phpHomeWorks/webMechanics/bank/table.php');
             session_destroy();
             exit;
         }
@@ -121,7 +121,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Account</title>
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./resources/sass/main.css">
 </head>
 <body>
     <div class="nav"></div>
