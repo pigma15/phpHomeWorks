@@ -220,16 +220,16 @@ form.newacc {
   border-radius: 0.4rem;
 }
 
-.newacc .input.read input {
-  border: 2px solid transparent;
-  background: transparent;
+.newacc .input .accNr {
+  display: inline-block;
+  width: calc(50% - 4rem);
+  font-size: 1.6rem;
+  margin: 0.8rem 3rem 0.8rem 1rem;
+  padding: 0.4rem 0.2rem;
+  float: left;
 }
 
-.newacc .input.read input:focus {
-  outline: none;
-}
-
-.newacc .input span {
+.newacc .input span.error {
   display: inline-block;
   width: 50%;
   margin-left: 50%;

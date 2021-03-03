@@ -1,1 +1,67 @@
-{"users":{"6cbc5f974970f8c0c418749a61bc9b4f":{"name":"Devyni","lastName":"Vigvamai","accNr":"LT202020060220202033","personID":"39812166671","creditAmount":987},"9d6eaa0b8d6e40499cd7af8a519e553e":{"name":"Novas","lastName":"Gintenberg","accNr":"LT202020560270802020","personID":"36607281342","creditAmount":3990.7},"b2c7a8d0e5695ecfd06f2ad687fed567":{"name":"Tito","lastName":"Gintenberg","accNr":"LT204420020220202020","personID":"45612135573","creditAmount":21345},"8029c98215d6bf271e04077a2fef801f":{"name":"Floza","lastName":"Rincherd","accNr":"LT505555526857585780","personID":"44506075731","creditAmount":13.87},"d41245a4ffc262e3ef3e8ac239bc4737":{"name":"Trinti","lastName":"Ferejas","accNr":"LT335555541118062017","personID":"50312049072","creditAmount":764.8900000000003}}}
+{
+    "users": {
+        "dffc53c97c259bbe598cce7f0eff70cd": {
+            "name": "Derni",
+            "lastName": "Aliov",
+            "accNr": "LT805555531996216752",
+            "personID": "51211030032",
+            "creditAmount": 0
+        },
+        "f4831488b6c0954cc0601413844f0aad": {
+            "name": "Buljon",
+            "lastName": "Arg'Blarg",
+            "accNr": "LT355555587231287123",
+            "personID": "37712052375",
+            "creditAmount": 0.45
+        },
+        "0d8eaf6b1b8c68542f9fa4363b61f4b8": {
+            "name": "Derria",
+            "lastName": "Berg",
+            "accNr": "LT165555557203656383",
+            "personID": "45511076534",
+            "creditAmount": 0
+        },
+        "b9bc1897dcbd3dab1dae0ece4f047cf5": {
+            "name": "Antuan",
+            "lastName": "Brom",
+            "accNr": "LT305555555856844943",
+            "personID": "51111239860",
+            "creditAmount": 0
+        },
+        "df25bdd725a6fbcfed64bef7511ac5c4": {
+            "name": "Pruba",
+            "lastName": "Daba",
+            "accNr": "LT885555551007473808",
+            "personID": "60212302254",
+            "creditAmount": 0
+        },
+        "d41245a4ffc262e3ef3e8ac239bc4737": {
+            "name": "Trinti",
+            "lastName": "Ferejas",
+            "accNr": "LT335555541118062017",
+            "personID": "50312049072",
+            "creditAmount": 764.89
+        },
+        "1c1cb35c42a7d04363127177ab4d09dc": {
+            "name": "Roy",
+            "lastName": "Gesundheit",
+            "accNr": "LT385555542484006542",
+            "personID": "50102165643",
+            "creditAmount": 12.5
+        },
+        "cdad04b07222e2aa714e3bb9c4cd28e8": {
+            "name": "Bon",
+            "lastName": "Pari",
+            "accNr": "LT525555507405134368",
+            "personID": "47604289056",
+            "creditAmount": 0
+        },
+        "8029c98215d6bf271e04077a2fef801f": {
+            "name": "Floza",
+            "lastName": "Rincherd",
+            "accNr": "LT505555526857585780",
+            "personID": "44506075731",
+            "creditAmount": 2456.3999999999996
+        }
+    }
+}

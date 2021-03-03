@@ -61,6 +61,7 @@
                 <span style="grid-column: auto / span 3">Actions</span>
             </div>';
 
+    
     foreach($database['users'] as $id => $user) {
         $error = (isset($_SESSION['errors'][$id]) && array_key_exists($id, $_SESSION['errors'])) ? $_SESSION['errors'][$id] : '';
         $table .= '<div class="line" style="'.$lineStyle.'">';
