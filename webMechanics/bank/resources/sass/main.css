@@ -21,6 +21,24 @@ body {
   background: #ddd;
 }
 
+@media (max-width: 700px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 610px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 7px;
+  }
+}
+
 .background {
   display: inline-block;
   width: 100vmax;
@@ -51,7 +69,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  height: 120px;
+  height: 100px;
   margin-bottom: 6rem;
 }
 
@@ -292,6 +310,20 @@ body {
   color: #911;
 }
 
+@media (max-width: 850px) {
+  .table {
+    margin: 40px 30px;
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 750px) {
+  .table {
+    margin: 40px 4px;
+    width: calc(100% - 8px);
+  }
+}
+
 form.login {
   background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
   -webkit-box-shadow: 1px 1px 10px 4px inset #eee6;
@@ -446,5 +478,57 @@ form.newacc {
 
 .newacc .submit input:hover {
   background: linear-gradient(0.8turn, #888e, #eed8, #888a);
+}
+
+@media (max-width: 850px) {
+  form.newacc {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+  .newacc h2 {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+  }
+  .newacc .input span.error {
+    padding-bottom: 0.6rem;
+  }
+  .newacc .submit {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .newacc .input label {
+    width: 100%;
+    text-align: left;
+    padding: 0.4rem 1.2rem;
+  }
+  .newacc .input input {
+    width: calc(100% - 4rem);
+    margin: 0.4rem 3rem 0.4rem 1rem;
+  }
+  .newacc .input .accNr {
+    width: calc(100% - 4rem);
+    margin: 0.4rem 3rem 0.4rem 1rem;
+    padding: 0.2rem 0.2rem;
+  }
+  .newacc .input span.error {
+    width: 100%;
+    margin: 0;
+  }
+  .newacc .submit {
+    width: 100%;
+    margin: 0;
+  }
+  .newacc .submit input {
+    width: calc(60% - 4rem);
+    margin: 0.8rem 3rem 1rem 1rem;
+  }
 }
 /*# sourceMappingURL=main.css.map */

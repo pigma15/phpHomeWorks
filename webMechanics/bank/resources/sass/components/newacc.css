@@ -100,4 +100,56 @@ form.newacc {
 .newacc .submit input:hover {
   background: linear-gradient(0.8turn, #888e, #eed8, #888a);
 }
+
+@media (max-width: 850px) {
+  form.newacc {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+  .newacc h2 {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+  }
+  .newacc .input span.error {
+    padding-bottom: 0.6rem;
+  }
+  .newacc .submit {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .newacc .input label {
+    width: 100%;
+    text-align: left;
+    padding: 0.4rem 1.2rem;
+  }
+  .newacc .input input {
+    width: calc(100% - 4rem);
+    margin: 0.4rem 3rem 0.4rem 1rem;
+  }
+  .newacc .input .accNr {
+    width: calc(100% - 4rem);
+    margin: 0.4rem 3rem 0.4rem 1rem;
+    padding: 0.2rem 0.2rem;
+  }
+  .newacc .input span.error {
+    width: 100%;
+    margin: 0;
+  }
+  .newacc .submit {
+    width: 100%;
+    margin: 0;
+  }
+  .newacc .submit input {
+    width: calc(60% - 4rem);
+    margin: 0.8rem 3rem 1rem 1rem;
+  }
+}
 /*# sourceMappingURL=newacc.css.map */

@@ -28,7 +28,7 @@
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  height: 120px;
+  height: 100px;
   margin-bottom: 6rem;
 }
 
@@ -267,5 +267,19 @@
   padding: 0.2rem;
   font-size: 1.4rem;
   color: #911;
+}
+
+@media (max-width: 850px) {
+  .table {
+    margin: 40px 30px;
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 750px) {
+  .table {
+    margin: 40px 4px;
+    width: calc(100% - 8px);
+  }
 }
 /*# sourceMappingURL=layout.css.map */
