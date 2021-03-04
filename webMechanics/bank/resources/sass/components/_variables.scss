@@ -20,4 +20,7 @@ $inputBackground: #eee;
     border-radius: 4px;
     box-shadow: 0 0 4px 2px #3334,
                 0 0 8px 4px inset #eeee;
+    &:hover {
+        background: linear-gradient(0.8turn, #888e, #eed8, #888a);
+    }
 }

@@ -5,42 +5,21 @@
             "lastName": "Aliov",
             "accNr": "LT805555531996216752",
             "personID": "51211030032",
-            "creditAmount": 0
+            "creditAmount": 46
         },
         "f4831488b6c0954cc0601413844f0aad": {
             "name": "Buljon",
             "lastName": "Arg'Blarg",
             "accNr": "LT355555587231287123",
             "personID": "37712052375",
-            "creditAmount": 0.45
+            "creditAmount": 9.45
         },
-        "0d8eaf6b1b8c68542f9fa4363b61f4b8": {
-            "name": "Derria",
-            "lastName": "Berg",
-            "accNr": "LT165555557203656383",
-            "personID": "45511076534",
-            "creditAmount": 0
-        },
-        "b9bc1897dcbd3dab1dae0ece4f047cf5": {
-            "name": "Antuan",
-            "lastName": "Brom",
-            "accNr": "LT305555555856844943",
-            "personID": "51111239860",
-            "creditAmount": 0
-        },
-        "df25bdd725a6fbcfed64bef7511ac5c4": {
-            "name": "Pruba",
-            "lastName": "Daba",
-            "accNr": "LT885555551007473808",
-            "personID": "60212302254",
-            "creditAmount": 0
-        },
-        "d41245a4ffc262e3ef3e8ac239bc4737": {
+        "5f484eb1c69b5559505df2e7edfbe2df": {
             "name": "Trinti",
             "lastName": "Ferejas",
             "accNr": "LT335555541118062017",
             "personID": "50312049072",
-            "creditAmount": 764.89
+            "creditAmount": 0
         },
         "1c1cb35c42a7d04363127177ab4d09dc": {
             "name": "Roy",
@@ -48,13 +27,6 @@
             "accNr": "LT385555542484006542",
             "personID": "50102165643",
             "creditAmount": 12.5
-        },
-        "cdad04b07222e2aa714e3bb9c4cd28e8": {
-            "name": "Bon",
-            "lastName": "Pari",
-            "accNr": "LT525555507405134368",
-            "personID": "47604289056",
-            "creditAmount": 0
         },
         "8029c98215d6bf271e04077a2fef801f": {
             "name": "Floza",

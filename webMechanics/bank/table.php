@@ -1,93 +1,39 @@
 <?php
-    session_start();
-    $database = json_decode(file_get_contents(__DIR__.'/bank.json'), true);
+    require __DIR__.'/bootstrap.php';
+    if (!isset($_SESSION['login']) || 'ok' != $_SESSION['login']) {
+        header('Location: '.URL);
+    }
+    
+    unset($_SESSION['create']);
+    $database = readData();
 
     if (!empty($_POST)) {
+        if (isset($_POST['restore']) && isset($_SESSION['deleted'])){
+            restoreAccount($database);
+        }
+        
         if(!isset($_POST['id']) || !array_key_exists($_POST['id'], $database['users'])) {
-            header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+            header('Location: '.URL.'table.php');
             exit;
         }
         if (isset($_POST['change'])) {
             if (isset($_POST['amount']) && preg_match('/^[0-9]+[.]?[0-9]{0,2}$/', $_POST['amount'])) {
-                if ('add' == $_POST['change']) {
-                    $database['users'][$_POST['id']]['creditAmount'] += $_POST['amount'];
-                    file_put_contents(__DIR__.'/bank.json', json_encode($database));
-                    session_destroy();
-                    header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                    exit;
-                } elseif ('remove' == $_POST['change']) {
-                    if (0 <= ($database['users'][$_POST['id']]['creditAmount'] - $_POST['amount'])) {
-                        $database['users'][$_POST['id']]['creditAmount'] -= $_POST['amount'];
-                        file_put_contents(__DIR__.'/bank.json', json_encode($database));
-                        session_destroy();
-                        header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                        exit;
-                    } else {
-                        $_SESSION['errors'][$_POST['id']] = 'Not enough credit';
-                        header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                        exit;
-                    }
-                }
+                changeAmount($_POST['id'], $_POST['amount'], $_POST['change'], $database);
             } else {
-                $_SESSION['errors'][$_POST['id']] = 'Invalid value';
-                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                exit;
-            }
-        } elseif (isset($_POST['delete'])) {
-            if (0 == $database['users'][$_POST['id']]['creditAmount']) {
-                unset($database['users'][$_POST['id']]);
-                file_put_contents(__DIR__.'/bank.json', json_encode($database));
-                session_destroy();
-                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-                exit;
-            } else {
-                $_SESSION['errors'][$_POST['id']] = 'Account is not empty';
-                header('Location: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+                $_SESSION['table']['errors'][$_POST['id']] = 'Invalid value';
+                header('Location: '.URL.'table.php');
                 exit;
             }
         }
-    }
-
-
-
-    $lineStyle = 'grid-template-columns: repeat(10, 1fr)';
-    $table = '<h2>Accounts</h2>
-            <div class="contents" style="'.$lineStyle.'">
-                <span style="grid-column: auto / span 1">First name</span>
-                <span style="grid-column: auto / span 1">Last name</span>
-                <span style="grid-column: auto / span 2">Account number</span>
-                <span style="grid-column: auto / span 2">Personal ID</span>
-                <span style="grid-column: auto / span 1">Balance</span>
-                <span style="grid-column: auto / span 3">Actions</span>
-            </div>';
-
-    
-    foreach($database['users'] as $id => $user) {
-        $error = (isset($_SESSION['errors'][$id]) && array_key_exists($id, $_SESSION['errors'])) ? $_SESSION['errors'][$id] : '';
-        $table .= '<div class="line" style="'.$lineStyle.'">';
-        foreach($user as $key => $value) {
-            $gridSpan = 1;
-            if ('accNr' == $key) $gridSpan = 2;
-            if ('personID' == $key) $gridSpan = 2;
-            $table .= '<div class="value" style="grid-column: auto / span '.$gridSpan.'">'.$value.'</div>';
+        if (isset($_POST['delete'])) {
+            deleteAccount($_POST['id'], $database);
         }
-        $table .= '<form class="actions" style="grid-column: auto / span 3" method="post">
-                    <input class="remove hidden" type="submit" name="change" id="remove'.$id.'" value="remove">
-                    <label for="remove'.$id.'">-</label>
-                    <input class="amount" type="text" name="amount" value="">
-                    <input class="add hidden" type="submit" name="change" id="add'.$id.'" value="add">
-                    <label for="add'.$id.'">+</label>
-                    <input class="delete hidden" type="submit" name="delete" id="delete'.$id.'" value="delete">
-                    <label for="delete'.$id.'">DELETE</label>
-                    <input type="hidden" name="id" value="'.$id.'">
-                    <span>'. $error .'</span>
-                </form></div>';
-        unset($_SESSION['errors'][$id]);
     }
 
-
-    $backgroundImages = ['adequatecouple.jpeg', 'crazylife.jpeg', 'happyrain1.jpeg', 'happyrain2.jpeg', 'highfive.jpg', 'moneyaura.jpeg'];
-    $backgroundImage = $backgroundImages[rand(0, count($backgroundImages) - 1)];
+    $table = generateTable($database);
+    unset($_SESSION['table']['errors']);
+    unset($_SESSION['private']['id']);
+    $backgroundImage = backgroundImage();
 ?>
 
 <!DOCTYPE html>
@@ -97,13 +43,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account list</title>
-    <link rel="stylesheet" href="./resources/sass/main.css">
+    <link rel="stylesheet" type="text/css" href="./resources/sass/main.css?<?= time() ?>" />
 </head>
 <body>
-    <div class="nav"></div>
+    <?= navBar() ?>
     <img class="background" src="./img/<?=$backgroundImage?>" alt="">
     <div class="table">
         <?= $table ?? '' ?>
     </div>
+
+<script>
+    const dom = document.querySelector('#fullscreen');
+    const button = document.querySelector('#close');
+    if (dom) {
+        button.addEventListener('click', () => {
+            dom.classList.add('hidden');
+            return;
+        })
+    }
+</script>
 </body>
 </html>

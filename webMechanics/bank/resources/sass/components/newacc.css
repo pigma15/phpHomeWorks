@@ -96,4 +96,8 @@ form.newacc {
   font-size: 2rem;
   height: 4rem;
 }
+
+.newacc .submit input:hover {
+  background: linear-gradient(0.8turn, #888e, #eed8, #888a);
+}
 /*# sourceMappingURL=newacc.css.map */

@@ -2,6 +2,28 @@
 function sortByLastName($a, $b) {
     return $a['lastName'] <=> $b['lastName'];
 }
+
+function backgroundImage() {
+    $backgroundImages = ['adequatecouple.jpeg', 'crazylife.jpeg', 'happyrain1.jpeg', 'happyrain2.jpeg', 'highfive.jpg', 'moneyaura.jpeg'];
+    return $backgroundImages[rand(0, count($backgroundImages) - 1)];
+}
+
+function navBar() {
+    return '<div class="nav">
+                <a href="'.URL.'./create.php">Create new account</a>
+                <a href="'.URL.'./table.php">List</a>
+                <a href="'.URL.'./logout.php">logout</a>
+            </div>';
+}
+
+function checkLogin($login, $password) {
+    $loginInfo = file_get_contents(DIR.'login.json');
+    $loginInfo = (json_decode($loginInfo, 1));
+    return ($login == $loginInfo['login']['name'] && $password == $loginInfo['login']['password']) ? true : false;
+}
+
+
+//database
 function readData() : array {
     if (!file_exists(DIR.'bank.json')) {
         $data = json_encode([]);
@@ -13,18 +35,13 @@ function readData() : array {
 }
 
 function writeData(array $data) : void {
-    _d('trig');
     $users = $data['users'];
     uasort($users, 'sortByLastName');
     $data['users'] = $users;
     file_put_contents(DIR.'bank.json', json_encode($data));
 }
 
-function backgroundImage() {
-    $backgroundImages = ['adequatecouple.jpeg', 'crazylife.jpeg', 'happyrain1.jpeg', 'happyrain2.jpeg', 'highfive.jpg', 'moneyaura.jpeg'];
-    return $backgroundImages[rand(0, count($backgroundImages) - 1)];
-}
-
+// create account
 function generateAccountNumber($users) {
     do {
         $accNr = 'LT'.rand(0,9).rand(0,9).'55555';
@@ -49,4 +66,111 @@ function checkPersonID($id, $users) {
 function checkAccountNr($accNr, $users) {
     return in_array($accNr, array_column($users, 'accNr')) ? false : true;
 }
+
+// table
+function changeAmount($id, $amount, $change, $database) {
+    if ('add' == $change) {
+        $database['users'][$id]['creditAmount'] += $amount;
+        writeData($database);
+        unset($_SESSION['table']['errors']);
+        $_SESSION['private']['id'] = $id;
+        header('Location: '.URL.'table.php?private='.$id);
+        exit;
+    }
+    if ('remove' == $change) {
+        if (0 <= ($database['users'][$id]['creditAmount'] - $amount)) {
+            $database['users'][$id]['creditAmount'] -= $amount;
+            writeData($database);
+            unset($_SESSION['table']['errors']);
+            $_SESSION['private']['id'] = $id;
+            header('Location: '.URL.'table.php?private='.$id);
+            exit;
+        } else {
+            $_SESSION['table']['errors'][$id] = 'Not enough credit';
+            header('Location: '.URL.'table.php');
+            exit;
+        }
+    }
+    $_SESSION['table']['errors'][$id] = 'Invalid value';
+    header('Location: '.URL.'table.php');
+    exit;
+}
+
+function deleteAccount($id, $database) {
+    if (0 == $database['users'][$id]['creditAmount']) {
+        $_SESSION['deleted'] = $database['users'][$id];
+        $name = $database['users'][$id]['name'].' '.$database['users'][$id]['lastName'];
+        unset($database['users'][$id]);
+        writeData($database);
+        header('Location: '.URL.'table.php?deleted='.$name);
+        exit;
+    } else {
+        $_SESSION['table']['errors'][$id] = 'Account is not empty';
+        header('Location: '.URL.'table.php');
+        exit;
+    }
+}
+
+function restoreAccount($database) {
+    do {
+        $id = md5(microtime());
+    } while (array_key_exists($id , $database['users']));
+    $database['users'][$id] = $_SESSION['deleted'];
+    writeData($database);
+    unset($_SESSION['deleted']);
+    header('Location: '.URL.'table.php');
+    exit;
+}
+
+function generateTable($database) {
+    $table = '<h2>Accounts</h2>';
+    if (isset($_SESSION['deleted'])) {
+        $table .= '<form class="restore" method="post">
+                        <input type="submit" name="restore" value="Restore last deleted">                  
+                    </form>';
+    }
+    if (isset($_GET['deleted'])) {
+        _d($_GET['deleted']);
+        $table .= '<form class="fullscreen" id="fullscreen" method="post">
+                        <div class="close" id="close">X</div>
+                        <span>'.$_SESSION['deleted']['name'].' '.$_SESSION['deleted']['lastName'].'\'s account has been deleted</span>
+                        <input type="submit" name="restore" value="Restore account">                  
+                    </form>';
+    }
+
+    $table .= '<div class="contents" style="grid-template-columns: repeat(10, 1fr)">
+        <span style="grid-column: auto / span 1">First name</span>
+        <span style="grid-column: auto / span 1">Last name</span>
+        <span style="grid-column: auto / span 2">Account number</span>
+        <span style="grid-column: auto / span 2">Personal ID</span>
+        <span style="grid-column: auto / span 1">Balance</span>
+        <span style="grid-column: auto / span 3">Actions</span>
+    </div>';
+    
+    foreach($database['users'] as $id => $user) {
+        $error = (isset($_SESSION['table']['errors'][$id]) && array_key_exists($id, $_SESSION['table']['errors'])) ? $_SESSION['table']['errors'][$id] : '';
+        $table .= '<div class="line" style="grid-template-columns: repeat(10, 1fr)">';
+        foreach($user as $key => $value) {
+            $gridSpan = 1;
+            if ('accNr' == $key) $gridSpan = 2;
+            if ('personID' == $key) $gridSpan = 2;
+            $table .= '<div class="value" style="grid-column: auto / span '.$gridSpan.'">'.$value.'</div>';
+        }
+        $table .= '<form class="actions" style="grid-column: auto / span 3" method="post">
+                <input class="remove hidden" type="submit" name="change" id="remove'.$id.'" value="remove">
+                <label for="remove'.$id.'">-</label>
+                <input class="amount" type="text" name="amount" value="">
+                <input class="add hidden" type="submit" name="change" id="add'.$id.'" value="add">
+                <label for="add'.$id.'">+</label>
+                <input class="delete hidden" type="submit" name="delete" id="delete'.$id.'" value="delete">
+                <label class="delete" for="delete'.$id.'">DELETE</label>
+                <input type="hidden" name="id" value="'.$id.'">
+                <span>'. $error .'</span>
+            </form></div>';
+    }
+    return $table;
+}
+
+
+
 ?>

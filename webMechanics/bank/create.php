@@ -1,5 +1,9 @@
 <?php
     require __DIR__.'/bootstrap.php';
+    if (!isset($_SESSION['login']) || 'ok' != $_SESSION['login']) {
+        header('Location: '.URL);
+    }
+    
     $database = readData();
     $attributes = ['name', 'lastName', 'accNr', 'personID'];
 
@@ -78,7 +82,7 @@
     <link rel="stylesheet" type="text/css" href="./resources/sass/main.css?<?= time() ?>" />
 </head>
 <body>
-    <div class="nav"></div>
+    <?= navBar() ?>
     <img class="background" src="./img/<?=$backgroundImage?>" alt="">
     <form class="newacc" action="" method="post">
         <h2>Create new account</h2>
