@@ -75,7 +75,7 @@ function changeAmount($id, $amount, $change, $database) {
         unset($_SESSION['table']['errors']);
         $_SESSION['table']['added'] = $database['users'][$id];
         $_SESSION['table']['added']['changed'] = $amount;
-        header('Location: '.URL.'table.php?changed=');
+        header('Location: '.URL.'table.php');
         exit;
     }
     if ('remove' == $change) {
@@ -85,7 +85,7 @@ function changeAmount($id, $amount, $change, $database) {
             unset($_SESSION['table']['errors']);
             $_SESSION['table']['removed'] = $database['users'][$id];
             $_SESSION['table']['removed']['changed'] = $amount;
-            header('Location: '.URL.'table.php?changed=');
+            header('Location: '.URL.'table.php');
             exit;
         } else {
             $_SESSION['table']['errors'][$id] = 'Not enough credit';

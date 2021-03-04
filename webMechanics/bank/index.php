@@ -7,11 +7,11 @@
             header('Location: '.URL.'table.php');
             exit;
         }
-        $_SESSION['login'] = 'Wrong username or password';
+        $_SESSION['login']['error'] = 'Wrong username or password';
         header('Location: '.URL);
         exit;
     }
-    $error = $_SESSION['login'] ?? '';
+    $error = $_SESSION['login']['error'] ?? '';
     unset($_SESSION['login']);
     $backgroundImage = backgroundImage();
 ?>
