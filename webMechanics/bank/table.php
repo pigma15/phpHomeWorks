@@ -61,6 +61,11 @@
             return;
         })
     }
+    addEventListener('keypress', (e) => {
+        if ('Enter' == e.key) {
+            e.preventDefault();
+        }
+    })
 </script>
 </body>
 </html>
