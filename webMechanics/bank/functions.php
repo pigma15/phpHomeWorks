@@ -73,8 +73,9 @@ function changeAmount($id, $amount, $change, $database) {
         $database['users'][$id]['creditAmount'] += $amount;
         writeData($database);
         unset($_SESSION['table']['errors']);
-        $_SESSION['private']['id'] = $id;
-        header('Location: '.URL.'table.php?private='.$id);
+        $_SESSION['table']['added'] = $database['users'][$id];
+        $_SESSION['table']['added']['changed'] = $amount;
+        header('Location: '.URL.'table.php?changed=');
         exit;
     }
     if ('remove' == $change) {
@@ -82,8 +83,9 @@ function changeAmount($id, $amount, $change, $database) {
             $database['users'][$id]['creditAmount'] -= $amount;
             writeData($database);
             unset($_SESSION['table']['errors']);
-            $_SESSION['private']['id'] = $id;
-            header('Location: '.URL.'table.php?private='.$id);
+            $_SESSION['table']['removed'] = $database['users'][$id];
+            $_SESSION['table']['removed']['changed'] = $amount;
+            header('Location: '.URL.'table.php?changed=');
             exit;
         } else {
             $_SESSION['table']['errors'][$id] = 'Not enough credit';
@@ -130,12 +132,25 @@ function generateTable($database) {
                     </form>';
     }
     if (isset($_GET['deleted'])) {
-        _d($_GET['deleted']);
         $table .= '<form class="fullscreen" id="fullscreen" method="post">
                         <div class="close" id="close">X</div>
                         <span>'.$_SESSION['deleted']['name'].' '.$_SESSION['deleted']['lastName'].'\'s account has been deleted</span>
                         <input type="submit" name="restore" value="Restore account">                  
                     </form>';
+    }
+    if (isset($_SESSION['table']['added']) || isset($_SESSION['table']['removed'])) {
+        if (isset($_SESSION['table']['added'])) {
+            $string = 'Added '.$_SESSION['table']['added']['changed'].' to '.$_SESSION['table']['added']['name'].' '.$_SESSION['table']['added']['lastName'].'\'s account';
+            unset($_SESSION['table']['added']);
+        }
+        if (isset($_SESSION['table']['removed'])) {
+            $string = 'Withdrawn '.$_SESSION['table']['removed']['changed'].' from '.$_SESSION['table']['removed']['name'].' '.$_SESSION['table']['removed']['lastName'].'\'s account';
+            unset($_SESSION['table']['removed']);
+        }
+        $table .= '<div class="fullscreen" id="fullscreen" method="post">
+                        <div class="close" id="close">X</div>
+                        <span>'.$string.'</span>                 
+                    </div>';
     }
 
     $table .= '<div class="contents" style="grid-template-columns: repeat(10, 1fr)">
