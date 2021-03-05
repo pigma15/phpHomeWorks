@@ -1,10 +1,13 @@
 <?php
+
     require __DIR__.'/bootstrap.php';
     if (!isset($_SESSION['login']) || 'ok' != $_SESSION['login']) {
         header('Location: '.URL);
+        exit;
     }
-    
+    unset($_SESSION['privateID']);
     unset($_SESSION['create']);
+    unset($_SESSION['private']);
     $database = readData();
 
     if (!empty($_POST)) {
@@ -18,7 +21,7 @@
         }
         if (isset($_POST['change'])) {
             if (isset($_POST['amount']) && preg_match('/^[0-9]+[.]?[0-9]{0,2}$/', $_POST['amount'])) {
-                changeAmount($_POST['id'], $_POST['amount'], $_POST['change'], $database);
+                changeAmount($_POST['id'], $_POST['amount'], $_POST['change'], $database, 'table');
             } else {
                 $_SESSION['table']['errors'][$_POST['id']] = 'Invalid value';
                 header('Location: '.URL.'table.php');
@@ -26,13 +29,12 @@
             }
         }
         if (isset($_POST['delete'])) {
-            deleteAccount($_POST['id'], $database);
+            deleteAccount($_POST['id'], $database, 'table');
         }
     }
 
     $table = generateTable($database);
     unset($_SESSION['table']['errors']);
-    unset($_SESSION['private']['id']);
     $backgroundImage = backgroundImage();
 ?>
 
@@ -67,5 +69,6 @@
         }
     })
 </script>
+
 </body>
 </html>

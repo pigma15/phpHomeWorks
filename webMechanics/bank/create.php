@@ -1,7 +1,10 @@
 <?php
     require __DIR__.'/bootstrap.php';
+    unset($_SESSION['private']);
+    unset($_SESSION['privateID']);
     if (!isset($_SESSION['login']) || 'ok' != $_SESSION['login']) {
         header('Location: '.URL);
+        exit;
     }
     
     $database = readData();
@@ -62,6 +65,7 @@
         foreach($attributes as $value) {
             $database['users'][$id][$value] = $_SESSION['create'][$value];
         }
+        $database['users'][$id]['creation'] = date("Y-m-d H:i:s", time());
         $database['users'][$id]['creditAmount'] = 0;
         writeData($database);
         unset($_SESSION['create']);

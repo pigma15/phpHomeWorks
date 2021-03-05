@@ -26,19 +26,19 @@ function checkLogin($login, $password) {
 //database
 function readData() : array {
     if (!file_exists(DIR.'bank.json')) {
-        $data = json_encode([]);
-        file_put_contents(DIR.'bank.json', $data);
+        $database = json_encode([]);
+        file_put_contents(DIR.'bank.json', $database);
     }
 
-    $data = file_get_contents(DIR.'bank.json');
-    return json_decode($data, 1);
+    $database = file_get_contents(DIR.'bank.json');
+    return json_decode($database, 1);
 }
 
-function writeData(array $data) : void {
-    $users = $data['users'];
+function writeData(array $database) : void {
+    $users = $database['users'];
     uasort($users, 'sortByLastName');
-    $data['users'] = $users;
-    file_put_contents(DIR.'bank.json', json_encode($data));
+    $database['users'] = $users;
+    file_put_contents(DIR.'bank.json', json_encode($database));
 }
 
 // create account
@@ -59,8 +59,29 @@ function checkName($name) {
 function checkPersonID($id, $users) {
     if (!preg_match('/^[3-6][\d]{10}$/', $id)) return false;
     if (in_array($id, array_column($users, 'personID'))) return false;
-    $year = (5 > substr($id, 0, 1) && '00' != substr($id, 1, 2)) ? '19'.substr($id, 1, 2) : '20'.substr($id, 1, 2);
-    return (!checkdate(substr($id, 3, 2), substr($id, 5, 2), $year) || $year.substr($id, 3, 2).substr($id, 5, 2) > date('Ymd')) ? false : true;
+    $year = (5 > substr($id, 0, 1) && '00' != substr($id, 1, 2)) ? '19'.substr($id, 1, 2) : '20'.substr($id, 1, 2);   
+    if (!checkdate(substr($id, 3, 2), substr($id, 5, 2), $year) || $year.substr($id, 3, 2).substr($id, 5, 2) > date('Ymd')) return false;
+    /* $sum = 0;
+    for ($i = 0, $multi = 1; $i < 10; $i++, $multi++) {
+        if ($multi > 9) $multi = 1;
+        $sum += ($id[$i] * $multi);
+    }
+    if ($sum % 11 != 10) {
+        $lastDigit = $sum % 11;
+    } else {
+        $sum = 0;
+        for ($i = 0, $multi = 3; $i < 10; $i++, $multi++) {
+            if ($multi > 9) $multi = 1;
+            $sum += ($id[$i] * $multi);
+        }
+        if ($sum % 11 != 10) {
+            $lastDigit = $sum % 11;
+        } else {
+            $lastDigit = 0;
+        }
+    }
+    return $lastDigit == $id[10] ? true : false; */
+    return true;
 }
 
 function checkAccountNr($accNr, $users) {
@@ -68,38 +89,43 @@ function checkAccountNr($accNr, $users) {
 }
 
 // table
-function changeAmount($id, $amount, $change, $database) {
+function changeAmount($id, $amount, $change, $database, $from) {
     if ('add' == $change) {
+        $database['transactions'][] = ['accountID' => $id, 'amount' => '+'.$amount, 'time' => date("Y-m-d H:i:s", time())];
         $database['users'][$id]['creditAmount'] += $amount;
         writeData($database);
-        unset($_SESSION['table']['errors']);
-        $_SESSION['table']['added'] = $database['users'][$id];
-        $_SESSION['table']['added']['changed'] = $amount;
-        header('Location: '.URL.'table.php');
+        unset($_SESSION[$from]['errors']);
+        $_SESSION[$from]['added'] = $database['users'][$id];
+        $_SESSION[$from]['added']['changed'] = $amount;
+        header('Location: '.URL.$from.'.php');
         exit;
     }
     if ('remove' == $change) {
         if (0 <= ($database['users'][$id]['creditAmount'] - $amount)) {
+            $database['transactions'][] = ['accountID' => $id, 'amount' => strval($amount * -1), 'time' => date("Y-m-d H:i:s", time())];
             $database['users'][$id]['creditAmount'] -= $amount;
             writeData($database);
-            unset($_SESSION['table']['errors']);
-            $_SESSION['table']['removed'] = $database['users'][$id];
-            $_SESSION['table']['removed']['changed'] = $amount;
-            header('Location: '.URL.'table.php');
+            unset($_SESSION[$from]['errors']);
+            $_SESSION[$from]['removed'] = $database['users'][$id];
+            $_SESSION[$from]['removed']['changed'] = $amount;
+            header('Location: '.URL.$from.'.php');
             exit;
         } else {
-            $_SESSION['table']['errors'][$id] = 'Not enough credit';
-            header('Location: '.URL.'table.php');
+            $_SESSION[$from]['errors'][$id] = 'Not enough credit';
+            header('Location: '.URL.$from.'.php');
             exit;
         }
     }
-    $_SESSION['table']['errors'][$id] = 'Invalid value';
-    header('Location: '.URL.'table.php');
+    $_SESSION[$from]['errors'][$id] = 'Invalid value';
+    header('Location: '.URL.$from.'.php');
     exit;
 }
 
-function deleteAccount($id, $database) {
+function deleteAccount($id, $database, $from) {
     if (0 == $database['users'][$id]['creditAmount']) {
+        foreach($database['transactions'] as $key => $transaction) {
+            if ($transaction['accountID'] == $id) unset($database['transactions'][$key]);
+        }
         $_SESSION['deleted'] = $database['users'][$id];
         $name = $database['users'][$id]['name'].' '.$database['users'][$id]['lastName'];
         unset($database['users'][$id]);
@@ -107,8 +133,8 @@ function deleteAccount($id, $database) {
         header('Location: '.URL.'table.php?deleted='.$name);
         exit;
     } else {
-        $_SESSION['table']['errors'][$id] = 'Account is not empty';
-        header('Location: '.URL.'table.php');
+        $_SESSION[$from]['errors'][$id] = 'Account is not empty';
+        header('Location: '.URL.$from.'.php');
         exit;
     }
 }
@@ -153,7 +179,7 @@ function generateTable($database) {
                     </div>';
     }
 
-    $table .= '<div class="contents" style="grid-template-columns: repeat(10, 1fr)">
+    $table .= '<div class="contents">
         <span style="grid-column: auto / span 1">First name</span>
         <span style="grid-column: auto / span 1">Last name</span>
         <span style="grid-column: auto / span 2">Account number</span>
@@ -164,12 +190,20 @@ function generateTable($database) {
     
     foreach($database['users'] as $id => $user) {
         $error = (isset($_SESSION['table']['errors'][$id]) && array_key_exists($id, $_SESSION['table']['errors'])) ? $_SESSION['table']['errors'][$id] : '';
-        $table .= '<div class="line" style="grid-template-columns: repeat(10, 1fr)">';
-        foreach($user as $key => $value) {
+        $table .= '<div class="line">';
+        foreach($user as $attribute => $value) {
+            if ('creation' == $attribute) continue;
             $gridSpan = 1;
-            if ('accNr' == $key) $gridSpan = 2;
-            if ('personID' == $key) $gridSpan = 2;
-            $table .= '<div class="value" style="grid-column: auto / span '.$gridSpan.'">'.$value.'</div>';
+            if ('personID' == $attribute) $gridSpan = 2;
+            if ('accNr' == $attribute) {
+                $gridSpan = 2;
+                $table .= '<form action="'.URL.'./private.php" class="value" style="grid-column: auto / span '.$gridSpan.'" method="post">
+                                <input type="submit" name="submit" value="'.$value.'">
+                                <input type="hidden" name="userID" value="'.$id.'">
+                            </form>';
+            } else {
+                $table .= '<div class="value" style="grid-column: auto / span '.$gridSpan.'">'.$value.'</div>';
+            }
         }
         $table .= '<form class="actions" style="grid-column: auto / span 3" method="post">
                 <input class="remove hidden" type="submit" name="change" id="remove'.$id.'" value="remove">
