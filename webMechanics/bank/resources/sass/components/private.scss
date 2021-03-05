@@ -45,6 +45,9 @@
             background: #5552;
             border: 1px solid transparent;
             border-radius: 0.4rem;
+            & span {
+                text-align: center;
+            }
         }
     }
     .transactions {
@@ -64,38 +67,3 @@
         }
     }
 }
-//
-/* 
-    .actions label {
-        @include placeCenter;
-        @include button;
-        width: 70%;
-        margin: 0rem 15%;
-        height: auto;
-    }
-    .actions label.delete {
-        padding: 0.2rem;
-        font-size: 1.5rem;
-        background: #d334;
-        box-shadow: 0 0 1px 1px $fontError;
-        &:hover {
-            background: #f336;
-            box-shadow: 0 0 3px 1px $fontError;
-        }
-    }
-    .actions .amount {
-        @include placeCenter;
-        width: 100%;
-        height: auto;
-    }
-    .actions input.hidden {
-        display: none;
-    }
-    .actions span {
-        @include placeCenter;
-        grid-column: auto / span 4;
-        width: 100%;
-        padding: 0.2rem;
-        font-size: 1.4rem;
-        color: $fontError;
-    } */
