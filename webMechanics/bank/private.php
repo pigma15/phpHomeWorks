@@ -33,10 +33,12 @@ if (!isset($_SESSION['private']['userID']) || !array_key_exists($_SESSION['priva
     exit;
 }
 $user = $database['users'][$_SESSION['private']['userID']];
-$userTransactions = [];
-foreach($database['transactions'] as $transaction) {
+$userTransactions = array_filter($database['transactions'], function($transaction) {
+    return $transaction['accountID'] == $_SESSION['private']['userID'];
+});
+/* foreach($database['transactions'] as $transaction) {
     if ($transaction['accountID'] == $_SESSION['private']['userID']) $userTransactions[] = $transaction;
-}
+} */
 
 $error = $_SESSION['private']['errors'][$_SESSION['private']['userID']] ?? '';
 unset($_SESSION['private']['errors']);
