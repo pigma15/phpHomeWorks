@@ -19,7 +19,7 @@ function navBar() {
 function checkLogin($login, $password) {
     $loginInfo = file_get_contents(DIR.'login.json');
     $loginInfo = (json_decode($loginInfo, 1));
-    return ($login == $loginInfo['login']['name'] && $password == $loginInfo['login']['password']) ? true : false;
+    return ($login == $loginInfo['login']['name'] && password_verify($password, $loginInfo['login']['password'])) ? true : false;
 }
 
 
