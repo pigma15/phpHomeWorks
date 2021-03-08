@@ -94,6 +94,7 @@ function changeAmount($id, $amount, $change, $database, $from) {
     if ('add' == $change) {
         $database['transactions'][] = ['accountID' => $id, 'amount' => '+'.$amount, 'time' => date("Y-m-d H:i:s", time())];
         $database['users'][$id]['creditAmount'] += $amount;
+        $database['users'][$id]['creditAmount'] = round($database['users'][$id]['creditAmount'], 2);
         writeData($database);
         unset($_SESSION[$from]['errors']);
         $_SESSION[$from]['added'] = $database['users'][$id];
@@ -105,6 +106,7 @@ function changeAmount($id, $amount, $change, $database, $from) {
         if (0 <= ($database['users'][$id]['creditAmount'] - $amount)) {
             $database['transactions'][] = ['accountID' => $id, 'amount' => strval($amount * -1), 'time' => date("Y-m-d H:i:s", time())];
             $database['users'][$id]['creditAmount'] -= $amount;
+            $database['users'][$id]['creditAmount'] = round($database['users'][$id]['creditAmount'], 2);
             writeData($database);
             unset($_SESSION[$from]['errors']);
             $_SESSION[$from]['removed'] = $database['users'][$id];
