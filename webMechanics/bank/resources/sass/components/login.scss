@@ -26,4 +26,9 @@ form.login {
         font-size: 1.4rem;
         color: $fontError;
     }
+    #pass {
+        @include button;
+        margin: 0.4rem;
+        padding: 0.6rem;
+    }
 }

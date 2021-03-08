@@ -1,7 +1,4 @@
 <?php
-function sortByLastName($a, $b) {
-    return $a['lastName'] <=> $b['lastName'];
-}
 
 function backgroundImage() {
     $backgroundImages = ['adequatecouple.jpeg', 'crazylife.jpeg', 'happyrain1.jpeg', 'happyrain2.jpeg', 'highfive.jpg', 'moneyaura.jpeg'];
@@ -24,6 +21,10 @@ function checkLogin($login, $password) {
 
 
 //database
+function sortByLastName($a, $b) {
+    return $a['lastName'] <=> $b['lastName'];
+}
+
 function readData() : array {
     if (!file_exists(DIR.'bank.json')) {
         $database = json_encode([]);
@@ -88,7 +89,7 @@ function checkAccountNr($accNr, $users) {
     return in_array($accNr, array_column($users, 'accNr')) ? false : true;
 }
 
-// table
+// manage accounts
 function changeAmount($id, $amount, $change, $database, $from) {
     if ('add' == $change) {
         $database['transactions'][] = ['accountID' => $id, 'amount' => '+'.$amount, 'time' => date("Y-m-d H:i:s", time())];
@@ -150,6 +151,7 @@ function restoreAccount($database) {
     exit;
 }
 
+// list
 function generateTable($database) {
     $table = '<h2>Accounts</h2>';
     if (isset($_SESSION['deleted'])) {

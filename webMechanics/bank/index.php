@@ -29,10 +29,26 @@
     <img class="background" src="./img/<?=$backgroundImage?>" alt="">
     <form class="login" method="post">
         <input type="text" name="login" placeholder="username">
-        <input type="password" name="password" placeholder="password">
+        <input type="password" name="password" placeholder="password" id="password">
+        <div id="pass">show password</div>
         <input class="submit" type="submit" name="submit" value="Submit">
         <span><?=$error?></span>
     </form>
+
+
+<script >
+    const passBtn = document.getElementById('pass');
+    const password = document.getElementById('password');
+    passBtn.onclick = () => {
+        if (password.type === 'password') {
+            password.type = 'text';
+        }
+        else if (password.type === 'text') {
+            password.type = 'password';
+        }
+        return;
+    }
+</script>
     
 </body>
 </html>

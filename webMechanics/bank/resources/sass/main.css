@@ -408,6 +408,21 @@ form.login span {
   color: #911;
 }
 
+form.login #pass {
+  background: linear-gradient(0.8turn, #eeee, #eed8, #eeea);
+  cursor: pointer;
+  border: 1px solid #333a;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
+          box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
+  margin: 0.4rem;
+  padding: 0.6rem;
+}
+
+form.login #pass:hover {
+  background: linear-gradient(0.8turn, #888e, #eed8, #888a);
+}
+
 form.newacc {
   background: linear-gradient(0.2turn, #dddd, #dea1, #eee3);
   -webkit-box-shadow: 1px 1px 10px 4px inset #eee6;
