@@ -30,5 +30,9 @@ form.login {
         @include button;
         margin: 0.4rem;
         padding: 0.6rem;
+        width: 20%;
+        background: #88c;
+        text-align: center;
+        border: none;
     }
 }

@@ -60,6 +60,10 @@ form.login #pass {
           box-shadow: 0 0 4px 2px #3334, 0 0 8px 4px inset #eeee;
   margin: 0.4rem;
   padding: 0.6rem;
+  width: 20%;
+  background: #88c;
+  text-align: center;
+  border: none;
 }
 
 form.login #pass:hover {
