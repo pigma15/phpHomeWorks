@@ -1,0 +1,20 @@
+body {
+    display: inline-block;
+    width: 100%;
+    min-height: 100vh;
+    background: $main;
+    padding: 2vh 5%;
+}
+
+img.bgImage {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    z-index: -100;
+    left: 0;
+    right: 0;
+    top: 0;
+    filter: grayscale(100%) opacity(0.5);
+    background: $main;
+}

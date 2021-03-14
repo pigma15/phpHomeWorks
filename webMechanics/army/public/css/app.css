@@ -1,0 +1,451 @@
+html {
+  scroll-behavior: smooth;
+  font-size: 10px;
+}
+
+body,
+body * {
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #232;
+}
+body input[type=text], body input[type=password],
+body * input[type=text],
+body * input[type=password] {
+  background: #4568;
+  background-image: linear-gradient(0.1turn, #aba8, #dfd3);
+  border: 1px solid #4568;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  box-shadow: 0 0 1rem 0.2rem inset #333a;
+  color: #def;
+  transition: 0.2s ease-in-out;
+}
+body input[type=text]::-moz-placeholder, body input[type=password]::-moz-placeholder, body * input[type=text]::-moz-placeholder, body * input[type=password]::-moz-placeholder {
+  color: #232;
+}
+body input[type=text]:-ms-input-placeholder, body input[type=password]:-ms-input-placeholder, body * input[type=text]:-ms-input-placeholder, body * input[type=password]:-ms-input-placeholder {
+  color: #232;
+}
+body input[type=text]::placeholder, body input[type=password]::placeholder,
+body * input[type=text]::placeholder,
+body * input[type=password]::placeholder {
+  color: #232;
+}
+body input[type=text]:hover, body input[type=password]:hover,
+body * input[type=text]:hover,
+body * input[type=password]:hover {
+  background: #333d;
+  box-shadow: 0 0 0.6rem 0.4rem inset #8a9a;
+}
+body input[type=text]:hover::-moz-placeholder, body input[type=password]:hover::-moz-placeholder, body * input[type=text]:hover::-moz-placeholder, body * input[type=password]:hover::-moz-placeholder {
+  color: #def;
+}
+body input[type=text]:hover:-ms-input-placeholder, body input[type=password]:hover:-ms-input-placeholder, body * input[type=text]:hover:-ms-input-placeholder, body * input[type=password]:hover:-ms-input-placeholder {
+  color: #def;
+}
+body input[type=text]:hover::placeholder, body input[type=password]:hover::placeholder,
+body * input[type=text]:hover::placeholder,
+body * input[type=password]:hover::placeholder {
+  color: #def;
+}
+
+body *:focus {
+  outline: 1px solid #333d;
+}
+
+body {
+  display: inline-block;
+  width: 100%;
+  min-height: 100vh;
+  background: #453;
+  padding: 2vh 5%;
+}
+
+img.bgImage {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  z-index: -100;
+  left: 0;
+  right: 0;
+  top: 0;
+  filter: grayscale(100%) opacity(0.5);
+  background: #453;
+}
+
+.sign {
+  background: #bccb;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.3rem 0.2rem #343d;
+  -webkit-backdrop-filter: blur(1rem);
+          backdrop-filter: blur(1rem);
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  width: 94%;
+  margin: 5rem 3%;
+  padding: 2rem 0;
+}
+.sign h2 {
+  -webkit-text-decoration: underline 0.2rem #686a;
+          text-decoration: underline 0.2rem #686a;
+}
+
+.sign form {
+  display: inline-block;
+  width: 100%;
+  padding: 0.4rem 5%;
+}
+.sign form h2 {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 2.4rem;
+  padding: 1rem 0;
+}
+.sign form .line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0.3rem 0;
+  height: auto;
+}
+.sign form .line label {
+  float: left;
+  width: 40%;
+  font-size: 1.6rem;
+  text-align: right;
+}
+.sign form .line label::after {
+  content: " : ";
+}
+.sign form .line input, .sign form .line span {
+  width: 54%;
+  margin: 0.3rem 3%;
+  padding: 0.2rem 1%;
+  float: left;
+  font-size: 1.5rem;
+}
+.sign form .line span.error {
+  margin-left: 43%;
+  color: #a33;
+}
+.sign form .confirm {
+  display: inline-block;
+  width: 100%;
+  padding: 0.6rem 0;
+  height: auto;
+}
+.sign form .confirm input {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin: 0.4rem;
+  padding: 0.3rem;
+  background: #eeea;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  transition: 0.2s ease-in;
+}
+.sign form .confirm input:hover {
+  background: #353a;
+  color: #def;
+}
+.sign form .confirm input:active {
+  border: 2px solid #222;
+}
+.sign form .confirm input {
+  margin-left: 43%;
+  width: 27%;
+}
+
+.navbar {
+  background: #bccb;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.3rem 0.2rem #343d;
+  -webkit-backdrop-filter: blur(1rem);
+          backdrop-filter: blur(1rem);
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 5%;
+  height: 10rem;
+  z-index: 1;
+}
+.navbar .hello {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 20%;
+  background: #4568;
+  border-radius: 0.6rem;
+  position: relative;
+  z-index: -11;
+  box-shadow: 0 0 0.6rem 0.2rem #bccb, 0 0 2rem 1rem inset #3338;
+  transition: 0.3s ease-out;
+}
+.navbar .hello span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding: 0.4rem;
+  z-index: 1;
+  font-size: 1.8rem;
+  color: #def;
+}
+.navbar .hello img {
+  display: inline-block;
+  height: 90%;
+  position: absolute;
+  filter: blur(0.2rem);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -10;
+  scale: 1;
+  transition: 0.2s ease-in-out;
+}
+.navbar .hello:hover {
+  cursor: default;
+  box-shadow: 0 0 0.6rem 0.2rem #4568, 0 0 1rem 0.4rem inset #bdc7;
+}
+.navbar .hello:hover img {
+  height: 100%;
+  filter: blur(0.001rem);
+}
+.navbar a {
+  font-size: 2rem;
+  -webkit-text-decoration: underline #686a;
+          text-decoration: underline #686a;
+}
+.navbar a:hover {
+  -webkit-text-decoration: underline #232;
+          text-decoration: underline #232;
+}
+
+.list {
+  background: #bccb;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.3rem 0.2rem #343d;
+  -webkit-backdrop-filter: blur(1rem);
+          backdrop-filter: blur(1rem);
+  display: inline-block;
+  width: 94%;
+  margin: 5rem 3%;
+  margin-top: 12rem;
+  padding: 2rem 0;
+  min-height: 20rem;
+}
+.list h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.list .listTemplate {
+  display: grid;
+  width: 96%;
+  margin: 0.2rem 2%;
+  grid-template-columns: 3fr 1fr;
+}
+.list .listTemplate:nth-of-type(even) {
+  border-radius: 0.3rem;
+  background: #3333;
+}
+.list .listTemplate .info {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  width: 98%;
+  padding: 0 1%;
+}
+.list .listTemplate .info span {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.list .listTemplate .info form {
+  display: grid;
+  place-items: center;
+}
+.list .listTemplate .info form label {
+  font-size: 1.4rem;
+  -webkit-text-decoration: underline #686a;
+          text-decoration: underline #686a;
+  cursor: pointer;
+}
+.list .listTemplate .info form label:hover {
+  -webkit-text-decoration: underline #232;
+          text-decoration: underline #232;
+}
+.list .listTemplate .info form .none {
+  display: none;
+}
+.list .listTemplate .actions {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  place-items: center;
+  text-align: center;
+}
+.list .listTemplate .actions .add {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.list .listTemplate .actions .add input {
+  width: 50%;
+  float: left;
+}
+.list .listTemplate .actions .add label {
+  width: 50%;
+  float: left;
+}
+.list .listTemplate .actions .delete {
+  width: 100%;
+}
+.list .listTemplate .actions .delete label {
+  background-color: #ecca;
+  border: 2px solid #9118;
+}
+.list .listTemplate .actions .delete label:hover {
+  background-color: #a33;
+}
+.list .listTemplate .actions label {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin: 0.4rem;
+  padding: 0.3rem;
+  background: #eeea;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  transition: 0.2s ease-in;
+}
+.list .listTemplate .actions label:hover {
+  background: #353a;
+  color: #def;
+}
+.list .listTemplate .actions label:active {
+  border: 2px solid #222;
+}
+.list .listTemplate .actions input.none {
+  display: none;
+}
+.list .listTemplate .actions .error {
+  font-size: 1.4rem;
+  color: #a33;
+  text-align: center;
+}
+.list .listTemplate.top {
+  font-size: 1.6rem;
+  margin: 2rem 2%;
+  -webkit-text-decoration: underline #686a;
+          text-decoration: underline #686a;
+}
+.list .listTemplate.top .actions {
+  text-align: center;
+}
+
+.soldierInfo {
+  background: #bccb;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.3rem 0.2rem #343d;
+  -webkit-backdrop-filter: blur(1rem);
+          backdrop-filter: blur(1rem);
+  width: 100%;
+  margin: 12rem 0;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.soldierInfo h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  -webkit-text-decoration: underline #686a;
+          text-decoration: underline #686a;
+}
+.soldierInfo span {
+  display: inline-block;
+  width: 100%;
+  font-size: 1.6rem;
+  margin: 0.4rem 0;
+}
+.soldierInfo span u {
+  -webkit-text-decoration: underline #686a;
+          text-decoration: underline #686a;
+}
+.soldierInfo .personal {
+  display: inline-block;
+  width: 100%;
+  padding-right: 2rem;
+}
+.soldierInfo .add {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 3rem 0;
+  height: 4rem;
+}
+.soldierInfo .add input {
+  width: 30%;
+  font-size: 1.6rem;
+}
+.soldierInfo .add label {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin: 0.4rem;
+  padding: 0.3rem;
+  background: #eeea;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  transition: 0.2s ease-in;
+  width: 40%;
+  height: 3rem;
+}
+.soldierInfo .add label:hover {
+  background: #353a;
+  color: #def;
+}
+.soldierInfo .add label:active {
+  border: 2px solid #222;
+}
+.soldierInfo .add input.none {
+  display: none;
+}
+.soldierInfo .transfers {
+  display: inline-block;
+}
+.soldierInfo .transfers h2 {
+  grid-column: 1/3;
+}
+.soldierInfo .transfers div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.soldierInfo .transfers div:nth-of-type(odd) {
+  border-radius: 0.3rem;
+  background: #3333;
+}
+.soldierInfo .transfers span {
+  width: 100%;
+  float: left;
+  padding: 0.4rem;
+}
+.soldierInfo .transfers span u {
+  text-decoration: none;
+}

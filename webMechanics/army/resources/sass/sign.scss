@@ -1,0 +1,18 @@
+.sign {
+    @include table;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    width: 94%;
+    margin: 5rem 3%;
+    padding: 2rem 0;
+    & h2 {
+        text-decoration: underline 0.2rem $underlineLight;
+    }
+}
+    .sign form {
+        @include form;
+        & .confirm input {
+            margin-left: 43%;
+            width: 27%;
+        }
+    }
