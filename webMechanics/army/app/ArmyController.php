@@ -171,7 +171,8 @@ class ArmyController {
             header('Location: '.URL);
             exit;
         }
-        Army::getArmy()->delete($soldier->regNr);
+        Army::getArmy()->delete($regNr);
+        Passwords::getPass()->delete($regNr);
         header('Location: '.URL);
         exit;
     }

@@ -26,6 +26,16 @@ class Passwords {
         $this->data[] = ['regNr' => $regNr, 'password' => $password, 'role' => 'private'];
     }
 
+    public function delete($regNr) {
+        foreach($this->data as $key => $unit) {
+            if ($unit['regNr'] == $regNr) {
+                unset($this->data[$key]);
+                $this->data = array_values($this->data);
+                return;
+            }
+        }
+    }
+
 }
 
 ?>
