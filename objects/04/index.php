@@ -73,5 +73,8 @@ $turboPinigine->ideti(14);
 $turboPinigine->ideti(1);
 $turboPinigine->ideti(2);
 
+echo '<pre>';
+print_r($turboPinigine);
+
 echo $turboPinigine->banknotai().' pinigu banknotais (ideta kartu banknotais - '.$turboPinigine->banknotaiKiekis().') ir '.$turboPinigine->monetos().' monetomis (ideta kartu monetomis - '.$turboPinigine->monetosKiekis().').';
 
