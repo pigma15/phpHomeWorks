@@ -30,13 +30,40 @@ class Pinigine {
 }
 
 class TurboPinigine extends Pinigine {
+    private $popieriniaiPinigaiKiekis;
+    private $metaliniaiPinigaiKiekis;
+
+    public function __construct() {
+        parent::__construct();
+        $this->popieriniaiPinigaiKiekis = 0;
+        $this->metaliniaiPinigaiKiekis = 0;
+    }
     
     public function banknotai() {
         return $this->popieriniaiPinigai;
     }
 
+    public function banknotaiKiekis() {
+        return $this->popieriniaiPinigaiKiekis;
+    }
+
     public function monetos() {
         return $this->metaliniaiPinigai;
+    }
+
+    public function monetosKiekis() {
+        return $this->metaliniaiPinigaiKiekis;
+    }
+    
+    public function ideti($kiekis) {
+        if (0 >= $kiekis) return;
+        if (2 < $kiekis) {
+            $this->popieriniaiPinigai += $kiekis;
+            ++$this->popieriniaiPinigaiKiekis;
+        } else {
+            $this->metaliniaiPinigai += $kiekis;
+            ++$this->metaliniaiPinigaiKiekis;
+        }
     }
 }
 
@@ -46,5 +73,5 @@ $turboPinigine->ideti(14);
 $turboPinigine->ideti(1);
 $turboPinigine->ideti(2);
 
-echo $turboPinigine->banknotai().' pinigu banknotais ir '.$turboPinigine->monetos().' monetomis.';
+echo $turboPinigine->banknotai().' pinigu banknotais (ideta kartu banknotais - '.$turboPinigine->banknotaiKiekis().') ir '.$turboPinigine->monetos().' monetomis (ideta kartu monetomis - '.$turboPinigine->monetosKiekis().').';
 
