@@ -15,6 +15,9 @@ class Army {
     }
 
     public function __destruct() {
+        usort($this->data, function ($a, $b) {
+            return $a->name <=> $b->name;
+        });
         file_put_contents(DIR.'data/army.json', json_encode($this->data));
     }
 

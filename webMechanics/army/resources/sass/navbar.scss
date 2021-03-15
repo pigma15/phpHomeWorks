@@ -15,6 +15,7 @@
     & .hello {
         display: grid;
         place-items: center;
+        cursor: default;
         height: 100%;
         width: 20%;
         background: $helloBackground;
@@ -23,7 +24,7 @@
         z-index: -11;
         box-shadow: 0 0 0.6rem 0.2rem $tableBG,
                     0 0 2rem 1rem inset #3338;
-        transition: 0.3s ease-out;
+        transition: 0.3s ease-out box-shadow;
         & span {
             display: inline-block;
             width: 100%;
@@ -43,11 +44,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: -10;
-            scale: (1);
-            transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out height, filter;
         }
         &:hover {
-            cursor: default;
             box-shadow: 0 0 0.6rem 0.2rem $helloBackground,
                     0 0 1rem 0.4rem inset #bdc7;
             & img {

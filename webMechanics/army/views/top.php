@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Army</title>
-    <link rel="stylesheet" type="text/css" href="./public/css/app.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="<?=URL?>public/css/app.css?<?= time() ?>" />
 </head>
 <body>
     <img class="bgImage" src="./img/<?='army'.rand(1,4).'.jpg'?>" alt="">

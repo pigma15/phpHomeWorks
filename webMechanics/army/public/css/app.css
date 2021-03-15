@@ -187,6 +187,7 @@ img.bgImage {
 .navbar .hello {
   display: grid;
   place-items: center;
+  cursor: default;
   height: 100%;
   width: 20%;
   background: #4568;
@@ -194,7 +195,7 @@ img.bgImage {
   position: relative;
   z-index: -11;
   box-shadow: 0 0 0.6rem 0.2rem #bccb, 0 0 2rem 1rem inset #3338;
-  transition: 0.3s ease-out;
+  transition: 0.3s ease-out box-shadow;
 }
 .navbar .hello span {
   display: inline-block;
@@ -215,11 +216,9 @@ img.bgImage {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -10;
-  scale: 1;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out height, filter;
 }
 .navbar .hello:hover {
-  cursor: default;
   box-shadow: 0 0 0.6rem 0.2rem #4568, 0 0 1rem 0.4rem inset #bdc7;
 }
 .navbar .hello:hover img {
