@@ -10,8 +10,8 @@ class Grybas {
     private $valgomas, $sukirmijes, $svoris;
 
     public function __construct() {
-        $this->valgomas = 1 == rand(0, 1) ? true : false;
-        $this->sukirmijes = 1 == rand(0, 1) ? true : false;
+        $this->valgomas = (bool) rand(0, 1);
+        $this->sukirmijes = (bool) rand(0, 1);
         $this->svoris = rand(5, 45);
     }
 
