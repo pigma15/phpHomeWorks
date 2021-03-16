@@ -19,7 +19,7 @@ class Grybas {
         return $this->valgomas && !$this->sukirmijes ? true : false;
     }
 
-    public function getSvoris() {
+    public function grybasSvoris() {
         return $this->svoris;
     }
 }
@@ -32,13 +32,17 @@ class Krepsys {
     }
 
     public function eitiGrybauti() {
-        $grybas = new Grybas;
-        if ($grybas->isGerasGrybas()) {
-            $this->svoris += $grybas->getSvoris();
+        do {
+            $grybas = new Grybas;
+            if ($grybas->isGerasGrybas()) {
+                $this->svoris += $grybas->grybasSvoris();
+            }  
         }
+        while (500 > $this->krepsysSvoris());
+        
     }
 
-    public function getSvoris() {
+    public function krepsysSvoris() {
         return $this->svoris;
     }
 }
@@ -46,10 +50,7 @@ class Krepsys {
 echo 'Sukuriamas krepsys ir su juo einama grybauti, kol prirenkama grybu, kuriu bendras svoris bent 500';
 $krepsys = new Krepsys;
 
-do {
-    $krepsys->eitiGrybauti();
-} 
-while (500 > $krepsys->getSvoris());
+$krepsys->eitiGrybauti();
 
 echo '<pre>';
 print_r($krepsys);

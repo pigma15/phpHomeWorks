@@ -16,11 +16,15 @@ class Stikline {
 
     public function ipilti($kiekis) {
         if (0 >= $kiekis) return;
-        if (($kiekis + $this->kiekis) >= $this->turis) {
+        
+        $kiekis += $this->kiekis;
+        $this->kiekis = min($kiekis, $this->turis);
+
+        /* if ($kiekis + $this->kiekis >= $this->turis) {
             $this->kiekis = $this->turis;
         } else {
             $this->kiekis += $kiekis;
-        }
+        } */
     }
 
     public function ispilti() {
