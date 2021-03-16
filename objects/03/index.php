@@ -38,8 +38,7 @@ class Krepsys {
                 $this->svoris += $grybas->grybasSvoris();
             }  
         }
-        while (500 > $this->krepsysSvoris());
-        
+        while (500 > $this->krepsysSvoris());       
     }
 
     public function krepsysSvoris() {
